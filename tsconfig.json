@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "allowJs": true,
+    "jsx": "react",
+    "sourceMap": true,
+    "outDir": "./public/",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@img/*": ["src/img/*"],
+      "@styles/*": ["src/styles/*"]
+    },
+    "types": [
+      "node",
+      "@types/jest", // добавить для типизации и подсказок по библиотеке
+      "@testing-library/jest-dom", // добавить для типизации и подсказок по библиотеке
+      "@testing-library/user-event" // добавить для типизации и подсказок по библиотеке
+    ],
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**/*", "public/**/*"]
+}
