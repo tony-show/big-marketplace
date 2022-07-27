@@ -4,9 +4,7 @@ import React from 'react'
 const MainPage: ReactFC = () => {
   return (
     <div className='wrapper'>
-      <h1>
-        <i className='ic_search' />
-      </h1>
+      <h1>Content</h1>
     </div>
   )
 }
