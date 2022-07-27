@@ -1,0 +1,60 @@
+@font-face {
+  font-family: 'icons';
+  src:  url('fonts/icons.eot?vb80ut');
+  src:  url('fonts/icons.eot?vb80ut#iefix') format('embedded-opentype'),
+    url('fonts/icons.ttf?vb80ut') format('truetype'),
+    url('fonts/icons.woff?vb80ut') format('woff'),
+    url('fonts/icons.svg?vb80ut#icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ic_arrow-down:before {
+  content: "\e903";
+}
+.ic_arrow-left:before {
+  content: "\e904";
+}
+.ic_arrow-right:before {
+  content: "\e905";
+}
+.ic_arrow-up:before {
+  content: "\e906";
+}
+.ic_camera:before {
+  content: "\e907";
+}
+.ic_cart:before {
+  content: "\e909";
+}
+.ic_map:before {
+  content: "\e90b";
+}
+.ic_user:before {
+  content: "\e911";
+}
+.ic_menu:before {
+  content: "\e900";
+}
+.ic_chat:before {
+  content: "\e901";
+}
+.ic_search:before {
+  content: "\e902";
+}
