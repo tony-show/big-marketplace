@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Footer from './components/layout/footer/footer'
 import Header from './components/layout/header/header'
+import Menu from './components/menu/menu'
 import MainPage from './pages/mainPage'
 import createStore from './store/store'
 
@@ -11,6 +12,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Provider store={createStore()}>
         <div className='wrapper'>
+          <Menu />
           <Header />
           <main className='content'>
             <div className='container'>
