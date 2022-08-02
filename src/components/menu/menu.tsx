@@ -123,9 +123,7 @@ const Menu: ReactFC = () => {
             </div>
           </>
         )}
-        <div className='menu__close' onClick={closeMenu}>
-          Х
-        </div>
+        <i className='ic_close menu__close' onClick={closeMenu} />
       </nav>
     </div>
   )
