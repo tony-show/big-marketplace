@@ -6,7 +6,7 @@ const categories: IMenuCategory[] = [
     id: 0,
     route: '/catalog/zhenshinam',
     name: 'Женщинам',
-    icon: IconsEnum.camera,
+    icon: IconsEnum.menu_woman,
     img: 'https://userpic.fishki.net/2016/03/08/484642/49606932f175e9bb9a7f9084de1c69b8.jpg',
     subCategories: [
       {
@@ -47,7 +47,7 @@ const categories: IMenuCategory[] = [
     id: 1,
     route: '/obuv',
     name: 'Обувь',
-    icon: IconsEnum.cart,
+    icon: IconsEnum.menu_shoes,
     img: 'https://i.pinimg.com/736x/5f/fa/65/5ffa65ad65120e96bfca29be01ed4af4.jpg',
     subCategories: [
       {
@@ -71,7 +71,7 @@ const categories: IMenuCategory[] = [
     id: 2,
     route: '/catalog/detyam',
     name: 'Детям',
-    icon: IconsEnum.chat,
+    icon: IconsEnum.menu_children,
     img: 'https://www.dniprowazirka.com.ua/gal/3_YYYY_YYYYYYYYYY.jpg',
     subCategories: [
       {
@@ -129,7 +129,7 @@ const categories: IMenuCategory[] = [
     id: 3,
     route: '/catalog/muzhchinam',
     name: 'Мужчинам',
-    icon: IconsEnum.map,
+    icon: IconsEnum.menu_man,
     img: 'https://images11.esquire.ru/upload/custom/75f/75f08b62588a022552cb710beb73ccf4.jpg',
     subCategories: [
       {
