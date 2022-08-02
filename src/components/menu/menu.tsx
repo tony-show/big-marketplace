@@ -35,7 +35,7 @@ const Menu: ReactFC = () => {
   }
 
   const renderCategories = (
-    childrenCategories: IMenuCategory[],
+    childrenCategories: IMenuCategory[] = [],
     parentCategory?: IMenuCategory
   ) => {
     const menuItemClass = parentCategory
@@ -101,7 +101,7 @@ const Menu: ReactFC = () => {
       <nav
         className='menu'
         style={{
-          gridTemplateColumns: `repeat(${!category ? 1 : 3}, 270px)`,
+          gridTemplateColumns: `repeat(${!category ? 1 : 3}, 290px)`,
         }}
       >
         <div className='menu__list'>{renderCategories(categories)}</div>
