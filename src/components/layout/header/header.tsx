@@ -1,6 +1,7 @@
 import Search from '@src/components/search/search'
 import { useAppDispatch } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
+import routing from '@src/routes/routes'
 import menuSlice from '@src/store/menu/menuSlice'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -26,7 +27,7 @@ const Header: ReactFC = () => {
               <i className='ic_map' />
               <span>Москва</span>
             </Link>
-            <Link to='/'>Бесплатная доставка</Link>
+            <Link to={routing.services.shipping}>Бесплатная доставка</Link>
           </div>
           <div>
             <div className='message'>
@@ -38,17 +39,19 @@ const Header: ReactFC = () => {
           <div className='menu-btn' onClick={openMenu}>
             <i className='ic_menu' />
           </div>
-          <div className='logo'>TONYSHOW</div>
+          <Link to={routing.home} className='logo'>
+            TONYSHOW
+          </Link>
           <Search />
-          <Link to='/' className='header__link'>
+          <Link to={routing.services.shipping} className='header__link'>
             <i className='ic_map' />
             <div>Адреса</div>
           </Link>
-          <Link to='/' className='header__link'>
+          <Link to={routing.login} className='header__link'>
             <i className='ic_user' />
             <div>Войти</div>
           </Link>
-          <Link to='/' className='header__link'>
+          <Link to={routing.basket} className='header__link'>
             <i className='ic_cart' />
             <div>Корзина</div>
           </Link>
