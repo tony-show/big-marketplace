@@ -1,6 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import menuSlice from './menu/menuSlice'
 
 const rootReducer = combineReducers({
+  menu: menuSlice.reducer,
 })
 
 const createStore = (initialState = {}) => {
