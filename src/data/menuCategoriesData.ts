@@ -45,7 +45,7 @@ const categories: IMenuCategory[] = [
   },
   {
     id: 1,
-    route: '/obuv',
+    route: '/catalog/obuv',
     name: 'Обувь',
     icon: IconsEnum.menu_shoes,
     img: 'https://i.pinimg.com/736x/5f/fa/65/5ffa65ad65120e96bfca29be01ed4af4.jpg',
