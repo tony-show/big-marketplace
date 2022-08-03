@@ -5,6 +5,7 @@ import Footer from './components/layout/footer/footer'
 import Header from './components/layout/header/header'
 import Menu from './components/menu/menu'
 import MainPage from './pages/mainPage'
+import ProductsPage from './pages/productsPage'
 import TemplatePage from './pages/tamplatePage'
 import routing from './routes/routes'
 import createStore from './store/store'
@@ -37,19 +38,11 @@ const App: React.FC = () => {
                   element={<TemplatePage title='Личный кабинет' />}
                 />
                 <Route path='/catalog/:category'>
-                  <Route index element={<TemplatePage title='Категория' />} />
+                  <Route index element={<ProductsPage />} />
                   <Route path=':subcategory'>
-                    <Route
-                      index
-                      element={<TemplatePage title='Подкатегория' />}
-                    />
-                    <Route path=':inner_subcategory'>
-                      <Route
-                        index
-                        element={
-                          <TemplatePage title='Внутренняя подкатегория' />
-                        }
-                      />
+                    <Route index element={<ProductsPage />} />
+                    <Route path=':innerSubcategory'>
+                      <Route index element={<ProductsPage />} />
                     </Route>
                   </Route>
                 </Route>
