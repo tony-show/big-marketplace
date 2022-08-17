@@ -1,0 +1,41 @@
+@import '../../styles/settings.sass'
+
+$transition: all 0.5s ease-in-out
+
+.mini-product-card
+  max-height: 100%
+  &__img
+    height: 80%
+    background-color: rgba(41,43,83,.03)
+    border-radius: $radius
+    position: relative
+    overflow: hidden
+    img
+      width: 100%
+      height: 100%
+      object-fit: cover
+  &__sale
+    position: absolute
+    left: 8px
+    bottom: 8px
+    background: $gradient
+    border-radius: 100px
+    padding: 2px 8px
+    font-size: 14px
+    font-weight: 700
+    color: $dark
+  &__price
+    font-size: 18px
+    line-height: 1em
+    font-weight: 700
+    margin-top: 16px
+  &__link,
+  &__link:hover
+    display: block
+    width: 10vw
+    color: $text
+    font-size: 14px
+    padding: 5px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis

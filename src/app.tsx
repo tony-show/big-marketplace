@@ -3,7 +3,11 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Footer from './components/layout/footer/footer'
 import Header from './components/layout/header/header'
-import MainPage from './pages/mainPage'
+import Menu from './components/menu/menu'
+import MainPage from './pages/mainPage/mainPage'
+import ProductsPage from './pages/productsPage/productsPage'
+import TemplatePage from './pages/tamplatePage'
+import routing from './routes/routes'
 import createStore from './store/store'
 
 const App: React.FC = () => {
@@ -11,11 +15,37 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Provider store={createStore()}>
         <div className='wrapper'>
+          <Menu />
           <Header />
           <main className='content'>
             <div className='container'>
               <Routes>
-                <Route path='/' element={<MainPage />} />
+                <Route path={routing.home} element={<MainPage />} />
+                <Route
+                  path={routing.login}
+                  element={<TemplatePage title='Вход' />}
+                />
+                <Route
+                  path={routing.basket}
+                  element={<TemplatePage title='Корзина' />}
+                />
+                <Route
+                  path='/services/:service'
+                  element={<TemplatePage title='Сервис' />}
+                />
+                <Route
+                  path='/lk/:page'
+                  element={<TemplatePage title='Личный кабинет' />}
+                />
+                <Route path='/catalog/:category'>
+                  <Route index element={<ProductsPage />} />
+                  <Route path=':subcategory'>
+                    <Route index element={<ProductsPage />} />
+                    <Route path=':innerSubcategory'>
+                      <Route index element={<ProductsPage />} />
+                    </Route>
+                  </Route>
+                </Route>
               </Routes>
             </div>
           </main>
