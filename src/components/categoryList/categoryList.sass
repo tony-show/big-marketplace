@@ -1,0 +1,31 @@
+@import '../../styles/settings.sass'
+
+.category-list
+  *:not(:last-child),
+  &__links
+    margin-bottom: 4px
+
+  // &__title
+
+  &__main-category
+    background: $gradient
+    color: $dark
+    padding: 2px 8px
+    border-radius: 5px
+    font-size: 17px
+    font-weight: 500
+    margin-left: -8px
+
+  &__links
+    display: flex
+    flex-direction: column
+    margin-left: -8px
+    a
+      padding: 2px 8px
+      font-size: 17px
+      font-weight: 500
+      border-radius: 5px
+      color: $text
+      &:hover
+        background-color: $bg
+        color: $dark
