@@ -181,6 +181,28 @@ const categories: IMenuCategory[] = [
     name: 'Электроника',
     icon: IconsEnum.menu_electronic,
     img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    subCategories: [
+      {
+        id: 0,
+        route: '/catalog/elektronika/smartfony',
+        name: 'Смартфоны',
+      },
+      {
+        id: 1,
+        route: '/catalog/elektronika/gdzhety',
+        name: 'Гаджеты',
+      },
+      {
+        id: 2,
+        route: '/catalog/elektronika/noutbuki',
+        name: 'Ноутбуки',
+      },
+      {
+        id: 3,
+        route: '/catalog/elektronika/televizory',
+        name: 'Телевизоры',
+      },
+    ],
   },
   {
     id: 8,
