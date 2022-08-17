@@ -5,18 +5,10 @@ import MainPageSlider from '@src/components/mainPageSlider/mainPageSlider'
 import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
 import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode } from 'react'
 import './productsPage.sass'
 
 const ProductsPage: ReactFC = () => {
-  let count = 1
-  const [productsCount, setProductsCount] = useState(42)
-
-  const addMoreProducts = () => {
-    count += 1
-    setProductsCount(productsCount * count)
-  }
-
   const renderCollections = (num: number) => {
     const collections: ReactNode[] = []
     for (let i = 0; i < num; i++) {
