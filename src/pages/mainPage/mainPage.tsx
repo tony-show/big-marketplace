@@ -44,7 +44,6 @@ const MainPage: ReactFC = () => {
 
   return (
     <div className='wrapper main'>
-      <h1>Главная</h1>
       <MainPageSlider />
       <div className='main__collections main__collections_4 main__block'>
         {renderCollections(8)}
