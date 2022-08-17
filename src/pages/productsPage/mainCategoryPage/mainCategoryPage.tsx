@@ -1,4 +1,3 @@
-import CategoryList from '@src/components/categoryList/categoryList'
 import CollectionCard from '@src/components/collectionCard/collectionCard'
 import MainPageSlider from '@src/components/mainPageSlider/mainPageSlider'
 import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
@@ -37,29 +36,20 @@ const MainCategoryPage: ReactFC = () => {
 
   return (
     <>
-      <div className='main-category-page__sidebar'>
-        <CategoryList />
+      <MainPageSlider />
+      <div className='main-category-page__collections main-category-page__collections_3 main-category-page__block'>
+        {renderCollections(8)}
       </div>
-      <div className='main-category-page__content'>
-        <MainPageSlider />
-        <div className='main-category-page__collections main-category-page__collections_3 main-category-page__block'>
-          {renderCollections(8)}
-        </div>
-        <div className='main-category-page__block'>
-          <h2>Популярные товары</h2>
-          <div className='main-category-page__products'>
-            {renderProducts(5)}
-          </div>
-        </div>
-        <div className='main-category-page__collections main-category-page__collections_4 main-category-page__block'>
-          {renderCollections(12)}
-        </div>
-        <div className='main-category-page__block'>
-          <h2>Новинки</h2>
-          <div className='main-category-page__products'>
-            {renderProducts(5)}
-          </div>
-        </div>
+      <div className='main-category-page__block'>
+        <h2>Популярные товары</h2>
+        <div className='main-category-page__products'>{renderProducts(5)}</div>
+      </div>
+      <div className='main-category-page__collections main-category-page__collections_4 main-category-page__block'>
+        {renderCollections(12)}
+      </div>
+      <div className='main-category-page__block'>
+        <h2>Новинки</h2>
+        <div className='main-category-page__products'>{renderProducts(5)}</div>
       </div>
     </>
   )
