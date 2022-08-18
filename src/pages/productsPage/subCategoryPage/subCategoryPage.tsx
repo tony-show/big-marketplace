@@ -1,5 +1,6 @@
 import Filters from '@src/components/filters/filters'
 import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
+import CustomPagination from '@src/components/pagination/pagination'
 import ProductCard from '@src/components/productCard/productCard'
 import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
@@ -57,7 +58,7 @@ const SubCategoryPage: ReactFC = () => {
         </div>
       </div>
       <div className='sub-category-page__products'>{renderProducts(40)}</div>
-      <div>Постраничная навигация</div>
+      <CustomPagination />
     </>
   )
 }

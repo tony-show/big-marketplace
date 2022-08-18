@@ -1,0 +1,42 @@
+@import '../../styles/settings.sass'
+
+.pagination
+  display: flex
+  align-items: center
+  gap: 8px
+  &__text-btn
+    width: initial !important
+    &:hover .page-link,
+    .page-link:focus
+      background-color: $light !important
+      border-color: $light
+      color: $primary
+      box-shadow: none
+    i
+      font-size: 0.8em
+    i + span,
+    span + i
+      margin-left: 4px
+
+// Bootstrap Styles
+.page
+  $size: 40px
+  &-item
+    width: $size
+    height: $size
+    &.active .page-link:hover
+      color: $light
+  &-link
+    height: $size
+    border-color: $light
+    border-radius: 100px
+    padding: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    color: $dark
+    &:hover
+      color: $dark
+.page-link.disabled,
+.disabled > .page-link
+  border: none
