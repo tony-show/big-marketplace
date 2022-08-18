@@ -33,7 +33,7 @@ const SubCategoryPage: ReactFC = () => {
         bage: 'new',
         credit: 'РАССРОЧКА ОТ 0-0-6!',
       }
-      products.push(<ProductCard product={productData} />)
+      products.push(<ProductCard key={i} product={productData} />)
     }
     return products
   }
