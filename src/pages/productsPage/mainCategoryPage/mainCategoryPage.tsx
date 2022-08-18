@@ -24,10 +24,19 @@ const MainCategoryPage: ReactFC = () => {
         id: i,
         name,
         brend: 'Apple',
-        img: `https://picsum.photos/id/${i}/300/500`,
+        cover: `https://picsum.photos/id/${i}/300/500`,
         price: Math.floor(Math.random() * 1000000),
         link: '/catalog/elektronika/telefony',
         sale: Math.floor(Math.random() * 100),
+        color: 'black',
+        ram: '2 Гб',
+        ssd: '1 Тб',
+        rating: {
+          total: 5,
+          count: 19,
+        },
+        seller: 'OZON',
+        shipTime: 3,
       }
       products.push(<MiniProductCard product={productData} />)
     }
