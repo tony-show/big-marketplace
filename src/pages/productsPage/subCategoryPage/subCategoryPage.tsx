@@ -1,5 +1,6 @@
 import Filters from '@src/components/filters/filters'
 import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
+import ProductCard from '@src/components/productCard/productCard'
 import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React, { ReactNode } from 'react'
@@ -15,12 +16,23 @@ const SubCategoryPage: ReactFC = () => {
         id: i,
         name,
         brend: 'Apple',
-        img: `https://picsum.photos/id/${i}/300/500`,
+        cover: `https://picsum.photos/id/${i}/400/300`,
         price: Math.floor(Math.random() * 1000000),
         link: '/catalog/elektronika/telefony',
         sale: Math.floor(Math.random() * 100),
+        color: 'black',
+        ram: '2 Гб',
+        ssd: '1 Тб',
+        rating: {
+          total: 3,
+          count: 19,
+        },
+        seller: 'OZON',
+        shipTime: 3,
+        bage: 'new',
+        credit: 'РАССРОЧКА ОТ 0-0-6!',
       }
-      products.push(<MiniProductCard product={productData} />)
+      products.push(<ProductCard product={productData} />)
     }
     return products
   }
@@ -28,7 +40,7 @@ const SubCategoryPage: ReactFC = () => {
   return (
     <>
       <div className='sub-category-page__sort-panel'>Панель сортировки</div>
-      {renderProducts(40)}
+      <div className='sub-category-page__products'>{renderProducts(40)}</div>
       <div>Постраничная навигация</div>
     </>
   )
