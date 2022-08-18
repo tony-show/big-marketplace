@@ -39,7 +39,23 @@ const SubCategoryPage: ReactFC = () => {
 
   return (
     <>
-      <div className='sub-category-page__sort-panel'>Панель сортировки</div>
+      <div className='sort'>
+        <div className='sort__actions'>
+          <span className='sort__actions-label'>Сортировка про:</span>
+          <div className='sort__action active'>Популярности</div>
+          <div className='sort__action'>Рейтингу</div>
+          <div className='sort__action'>
+            <span>Цене</span>
+            <i className='ic_arrow-down' />
+          </div>
+          <div className='sort__action'>Скидке</div>
+          <div className='sort__action'>Обновлению</div>
+        </div>
+        <div className='sort__view'>
+          <i className='ic_grid active' />
+          <i className='ic_grid-mini' />
+        </div>
+      </div>
       <div className='sub-category-page__products'>{renderProducts(40)}</div>
       <div>Постраничная навигация</div>
     </>
