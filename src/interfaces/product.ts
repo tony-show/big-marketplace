@@ -45,5 +45,8 @@ interface IProduct {
     | '500 Гб'
     | '512 Гб'
     | '1000 Гб'
+  category?: string
+  subCategory?: string
+  subCategoryInner?: string
 }
 export default IProduct
