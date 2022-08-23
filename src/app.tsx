@@ -5,6 +5,7 @@ import Footer from './components/layout/footer/footer'
 import Header from './components/layout/header/header'
 import Menu from './components/menu/menu'
 import MainPage from './pages/mainPage/mainPage'
+import ProductPage from './pages/productPage/productPage'
 import ProductsPage from './pages/productsPage/productsPage'
 import TemplatePage from './pages/tamplatePage'
 import routing from './routes/routes'
@@ -46,6 +47,7 @@ const App: React.FC = () => {
                     </Route>
                   </Route>
                 </Route>
+                <Route path='/product/:id' element={<ProductPage />} />
               </Routes>
             </div>
           </main>
