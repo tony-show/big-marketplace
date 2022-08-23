@@ -1,0 +1,63 @@
+@import '../../styles/settings.sass'
+
+.filter
+  &.close
+    .filter__close-btn
+      transform: rotate(135deg)
+    .filter__content
+      display: none
+  &__head
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-bottom: 16px
+    span
+      font-weight: 700
+      font-size: 18px
+  &__close-btn
+    $size: 8px
+    width: $size
+    height: $size
+    cursor: pointer
+    border-top: 2px solid $text
+    border-right: 2px solid $text
+    opacity: 0.6
+    transition: all 0.3s ease-in-out
+    transform: rotate(-45deg)
+  &__colors
+    display: grid
+    grid-template-columns: repeat(auto-fill, 30px)
+    grid-gap: 8px
+  &__color
+    $size: 30px
+    width: $size
+    height: $size
+    border-radius: $size
+    position: relative
+    &:hover::after
+      $offset: -4px
+      cursor: pointer
+      content: ''
+      display: block
+      position: absolute
+      top: $offset
+      right: $offset
+      left: $offset
+      bottom: $offset
+      border-radius: $size
+      border: 2px solid $accent
+  &__list
+    display: grid
+    grid-gap: 4px
+  &__list-content
+    max-height: 200px
+    overflow: auto
+  &__search
+    margin-bottom: 8px
+  &__more
+    cursor: pointer
+    color: $text
+    margin-right: auto
+    margin-top: 4px
+    border-bottom: 1px dashed $dark

@@ -1,0 +1,43 @@
+@import '../../../styles/settings.sass'
+
+.sub-category-page
+  &__products
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    grid-gap: 16px
+    &_3-col
+      grid-template-columns: repeat(3, 1fr)
+    > *
+      margin-top: -54px
+
+.sort
+  display: flex
+  align-items: center
+  justify-content: space-between
+  margin-bottom: 70px
+
+  &__actions
+    display: flex
+    gap: 16px
+    font-size: 15px
+    &-label
+      color: $text
+
+  &__action
+    cursor: pointer
+    border-bottom: 1px dashed #000
+    &.active
+      color: $primary
+      border-color: $primary
+    i
+      font-size: 0.7em
+      margin-left: 4px
+  &__view
+    display: flex
+    gap: 8px
+    font-size: 18px
+    i
+      cursor: pointer
+      color: $default
+      &.active
+        color: $primary
