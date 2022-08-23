@@ -40,9 +40,9 @@ const App: React.FC = () => {
                 />
                 <Route path='/catalog/:category'>
                   <Route index element={<ProductsPage />} />
-                  <Route path=':subcategory'>
+                  <Route path=':subCategory'>
                     <Route index element={<ProductsPage />} />
-                    <Route path=':innerSubcategory'>
+                    <Route path=':innerSubCategory'>
                       <Route index element={<ProductsPage />} />
                     </Route>
                   </Route>

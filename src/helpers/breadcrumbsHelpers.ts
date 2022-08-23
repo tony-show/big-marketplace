@@ -1,12 +1,7 @@
 import { IMenuCategory } from '@src/interfaces/menuCategories'
 import categories from '@src/data/menuCategoriesData'
 import IBreadcrumb from '@src/interfaces/breadcrumb'
-
-interface ICategoriesParams {
-  category: string
-  subcategory?: string
-  innerSubcategory?: string
-}
+import ICategoriesParams from '@src/interfaces/params'
 
 interface IOptions {
   categories: IMenuCategory[]
@@ -19,8 +14,8 @@ const breadcrumbsHelpers = {
   getCategoriesBreadcrumbsData: (
     paramsObj: ICategoriesParams
   ): IBreadcrumb[] => {
-    const { category, subcategory, innerSubcategory } = paramsObj
-    const paramsArr = [category, subcategory, innerSubcategory]
+    const { category, subCategory, innerSubCategory } = paramsObj
+    const paramsArr = [category, subCategory, innerSubCategory]
     const breadcrumbsData: IBreadcrumb[] = []
     const options: IOptions = {
       categories,
