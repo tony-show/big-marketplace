@@ -1,5 +1,7 @@
 import Breadcrumbs from '@src/components/breadcrumbs/breadcrumbs'
 import Preloader from '@src/components/preloader/preloader'
+import ProductInfo from '@src/components/productInfo/productInfo'
+import RatingStars from '@src/components/ratingStars/ratingStars'
 import breadcrumbsHelpers from '@src/helpers/breadcrumbsHelpers'
 import IBreadcrumb from '@src/interfaces/breadcrumb'
 import ICategoriesParams from '@src/interfaces/params'
@@ -40,7 +42,7 @@ const ProductPage: ReactFC = () => {
     if (id) {
       setTimeout(() => {
         setProduct(productData)
-      }, 1000)
+      }, 300)
     }
   }, [id])
 
@@ -60,12 +62,24 @@ const ProductPage: ReactFC = () => {
   if (!product) return <Preloader />
 
   return (
-    <div className='wrapper'>
+    <div className='product-page'>
       <Breadcrumbs data={getBreadcrumbsData()} />
-      <h1>
+      <h1 className='product__title'>
         {product.brend} / {product.name} / {product.ram} / {product.ssd} /{' '}
         {product.color}
       </h1>
+      <div className='product__statistic'>
+        <RatingStars rating={4} />
+        <a href='#reviews' className='product__reviews-link'>
+          6 отзывов
+        </a>
+        <div className='product__articul'>
+          <span>Артикул:</span>
+          <strong>113006388</strong>
+        </div>
+        <span>Купили более 40 раз</span>
+      </div>
+      <ProductInfo />
     </div>
   )
 }
