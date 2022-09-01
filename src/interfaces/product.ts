@@ -50,3 +50,11 @@ interface IProduct {
   innerSubCategory?: string
 }
 export default IProduct
+
+export interface IInformationList {
+  title: string
+  list: {
+    label: string
+    value: string
+  }[]
+}

@@ -1,0 +1,46 @@
+@import '../../../styles/settings.sass'
+
+.product-actions
+  position: sticky
+  top: 32px
+  padding: 24px
+  border-radius: $radius
+  box-shadow: $shadow
+  background-color: $light
+  &__top
+    display: grid
+    grid-template-columns: 1fr 24px
+    grid-gap: 16px
+    align-items: center
+  &__price
+    display: flex
+    align-items: flex-end
+    gap: 8px
+    strong
+      font-size: 28px
+      line-height: 1em
+    span
+      text-decoration: line-through
+      color: $text
+      margin-left: 8px
+  &__to-favorite
+    cursor: pointer
+    font-size: 24px
+    &:hover,
+    &.active
+      color: $accent
+  &__credit
+    margin: 4px 0 16px
+    span
+      color: $text
+      margin-right: 8px
+    strong
+      color: $accent
+  &__ship
+    margin-top: 16px
+    font-size: 15px
+    line-height: 1.2em
+    strong
+      margin-right: 8px
+    span
+      font-weight: 300

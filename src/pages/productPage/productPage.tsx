@@ -1,6 +1,6 @@
 import Breadcrumbs from '@src/components/breadcrumbs/breadcrumbs'
 import Preloader from '@src/components/preloader/preloader'
-import ProductInfo from '@src/components/productInfo/productInfo'
+import ProductInfo from '@src/modules/productInfo/productInfo'
 import RatingStars from '@src/components/ratingStars/ratingStars'
 import breadcrumbsHelpers from '@src/helpers/breadcrumbsHelpers'
 import IBreadcrumb from '@src/interfaces/breadcrumb'
@@ -79,7 +79,7 @@ const ProductPage: ReactFC = () => {
         </div>
         <span>Купили более 40 раз</span>
       </div>
-      <ProductInfo />
+      <ProductInfo product={product} />
     </div>
   )
 }
