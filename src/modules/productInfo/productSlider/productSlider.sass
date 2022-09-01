@@ -1,4 +1,4 @@
-@import '../../styles/settings.sass'
+@import '../../../styles/settings.sass'
 
 $height: 600px
 $btn: 30px
@@ -12,6 +12,11 @@ $margin: 8px
 .product-slider
   width: 100%
   height: $height
+
+  &__zoom-img
+    width: 100%
+    > div
+      height: 100%
   .swiper-wrapper
     height: 100% !important
     top: 0
@@ -55,3 +60,7 @@ $margin: 8px
       height: 100%
     &.swiper-slide-thumb-active
       border: 2px solid $accent
+
+.zoomed-image
+  background-size: cover
+  cursor: pointer
