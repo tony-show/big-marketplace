@@ -4,6 +4,7 @@ import IRating from '@src/interfaces/rating'
 import { ReactFC } from '@src/interfaces/react'
 import moment from 'moment'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './productCard.sass'
 
 export interface IMiniProductCardProps {
@@ -14,7 +15,6 @@ const ProductCard: ReactFC<IMiniProductCardProps> = ({
   product: {
     id,
     name,
-    link,
     brend,
     price,
     cover,
@@ -51,8 +51,20 @@ const ProductCard: ReactFC<IMiniProductCardProps> = ({
     )
   }
 
+  const toFavoriteHandle = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setToFavorite(!toFavorite)
+  }
+
+  const addToCart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    alert('Товар добавлен в корзину!')
+  }
+
   return (
-    <div className='product-card'>
+    <Link to={`/product/${id}`} className='product-card'>
       <div className='product-card__top'>
         <div className='product-card__bage'>{bage}</div>
         <img src={cover} alt={name} className='product-card__img' />
@@ -73,16 +85,18 @@ const ProductCard: ReactFC<IMiniProductCardProps> = ({
         </div>
         <div className='product-card__credit'>{credit}</div>
         <div className='product-card__actions'>
-          <div className='product-card__bay'>В корзину</div>
+          <div className='product-card__bay' onClick={addToCart}>
+            В корзину
+          </div>
           <div className='product-card__favorite'>
             <i
               className={toFavorite ? 'ic_heart-fill' : 'ic_heart'}
-              onClick={() => setToFavorite(!toFavorite)}
+              onClick={toFavoriteHandle}
             />
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 export default ProductCard
