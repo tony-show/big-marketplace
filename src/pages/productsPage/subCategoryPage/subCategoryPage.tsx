@@ -17,7 +17,7 @@ const SubCategoryPage: ReactFC = () => {
         id: i,
         name,
         brend: 'Apple',
-        cover: `https://picsum.photos/id/${i}/400/300`,
+        cover: `https://placeimg.com/400/300/tech?id=${i}`,
         price: Math.floor(Math.random() * 1000000),
         link: '/catalog/elektronika/telefony',
         sale: Math.floor(Math.random() * 100),

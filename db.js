@@ -6,7 +6,7 @@ module.exports = () => {
   const getImages = (id, count) => {
     const images = []
     for (let i = 1; i <= count; i++) {
-      images.push(`https://picsum.photos/id/${id}${i}/1920/1080`)
+      images.push(`https://placeimg.com/1920/1080/tech?id=${id}${i}`)
     }
     return images
   }
@@ -14,7 +14,7 @@ module.exports = () => {
   for (let i = 1; i <= 100; i++) {
     const contentImages = getImages(i, Math.floor(Math.random() * 5))
     const sliderImages = getImages(i + 1, Math.floor(Math.random() * 10))
-    const coverImage = `https://picsum.photos/id/${i}/1920/1080`
+    const coverImage = `https://placeimg.com/1920/1080/tech?id=${i}`
     data.projects.push({
       id: i,
       cover: coverImage,
