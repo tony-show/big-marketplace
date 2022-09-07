@@ -1,0 +1,76 @@
+@import '../../styles/settings.sass'
+
+.basket
+  display: grid
+  grid-template-columns: 1fr 360px
+  grid-gap: 32px
+  &__main
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-gap: 24px
+    > *:nth-child(1),
+    > *:nth-child(2)
+      grid-column: 1 / -1
+  // &__sidebar
+  &__block
+    box-shadow: $shadow
+    background-color: $light
+  &__select-address
+    cursor: pointer
+    color: $accent
+  &__modal-content
+    display: flex
+    flex-direction: column
+    gap: 32px
+    min-height: 20vh
+    .button
+      margin-right: auto
+      margin-top: auto
+  &__ship-types
+    display: flex
+    max-width: 700px
+  &__ship-type
+    cursor: pointer
+    padding: 16px 32px
+    border-radius: $radius
+    border: 1px solid $borderColor
+    background-color: $borderColor
+    color: $dark
+    display: grid
+    align-items: center
+    justify-items: center
+    line-height: 1em
+    font-weight: 700
+    &.active
+      cursor: default
+      border-color: $accent
+      color: $accent
+      background-color: $light
+  &__ship-address-list
+    display: grid
+    grid-gap: 10px
+    line-height: 1em
+    color: $text
+    > *
+      cursor: pointer
+      &:hover,
+      &.active
+        color: $dark
+  &__selected-pay-method
+    strong
+      color: $accent
+      cursor: pointer
+  &__pay-methods
+    display: grid
+    grid-gap: 8px
+    justify-items: center
+  &__pay-method
+    cursor: pointer
+    width: 280px
+    padding: 16px 24px
+    border-radius: $radius
+    border: 1px solid $borderColor
+    &:hover,
+    &.active
+      color: $accent
+      border-color: $accent

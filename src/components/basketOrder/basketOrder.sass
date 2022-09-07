@@ -1,0 +1,54 @@
+@import '../../styles/settings.sass'
+
+.basket-order
+  box-shadow: $shadow
+  border-radius: $radius
+  background-color: $light
+  padding: 16px 24px
+  position: sticky
+  top: 32px
+  &__price
+    font-size: 24px
+    display: flex
+    align-items: center
+    justify-content: space-between
+  &__price-info
+    color: $text
+    display: grid
+    grid-gap: 8px
+    margin: 8px 0 16px
+    > div
+      display: flex
+      justify-content: space-between
+  &__info-wrap
+    display: grid
+    grid-gap: 12px
+  &__info
+    display: flex
+    gap: 8px
+    flex-wrap: wrap
+    strong,
+    span
+      font-weight: 700
+      justify-self: start
+    span
+      cursor: pointer
+      color: $accent
+      border-bottom: 1px dashed $accent
+    div
+      grid-column: 1 / -1
+      color: $text
+  &__conditions
+    font-size: 14px
+    color: $dark
+    padding-left: 20px
+    position: relative
+    line-height: 1.4em
+    font-weight: 100
+    &::before
+      content: '✓'
+      display: block
+      position: absolute
+      top: 0
+      left: 0
+      color: $accent
