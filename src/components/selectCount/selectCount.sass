@@ -1,0 +1,30 @@
+@import '../../styles/settings.sass'
+
+.select-count
+  display: inline-flex
+  align-items: center
+  justify-content: space-between
+  gap: 8px
+  &__less,
+  &__more
+    $size: 40px
+    cursor: pointer
+    width: $size
+    height: $size
+    border-radius: $size
+    border: 1px solid $borderColor
+    display: grid
+    align-items: center
+    justify-items: center
+    font-size: 24px
+    line-height: 0
+    font-weight: 100
+    &.disable
+      color: $borderColor
+      pointer-events: none
+  &__less
+    font-size: 34px
+  &__value
+    font-weight: 600
+    width: 20px
+    text-align: center

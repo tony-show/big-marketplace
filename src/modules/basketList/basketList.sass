@@ -1,0 +1,34 @@
+@import '../../styles/settings.sass'
+
+.basket-list
+  &__head
+    padding-bottom: 16px
+    margin-bottom: 16px
+    border-bottom: 1px solid $borderColor
+
+  &__check-all
+    display: flex
+    align-items: center
+    justify-content: space-between
+  &__close
+    $size: 20px
+    width: $size
+    height: $size
+    cursor: pointer
+    font-size: 28px
+    line-height: 0
+    font-weight: 700
+    text-align: center
+    display: grid
+    align-items: center
+    justify-items: center
+  &__products
+    display: grid
+    grid-gap: 16px
+    max-height: 2000px
+    transition: all 0.3s ease-in-out
+    &.hide
+      max-height: 0
+      overflow: hidden
+  &__stat
+    font-weight: 600

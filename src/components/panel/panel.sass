@@ -1,0 +1,24 @@
+@import '../../styles/settings.sass'
+
+.panel
+  box-shadow: $shadow
+  border-radius: $radius
+  background-color: $light
+  padding: 16px 24px
+  &_warning
+    border: 1px solid $accent
+
+  &__title
+    font-size: 24px
+    margin-bottom: 16px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    span
+      font-size: 15px
+      font-weight: 600
+      margin-bottom: auto
+      color: $accent
+      cursor: pointer
+
+  // &__content
