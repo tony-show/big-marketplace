@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Footer from './components/layout/footer/footer'
 import Header from './components/layout/header/header'
 import Menu from './components/menu/menu'
+import BasketPage from './pages/basketPage/basketPage'
 import MainPage from './pages/mainPage/mainPage'
 import ProductPage from './pages/productPage/productPage'
 import ProductsPage from './pages/productsPage/productsPage'
@@ -26,10 +27,7 @@ const App: React.FC = () => {
                   path={routing.login}
                   element={<TemplatePage title='Вход' />}
                 />
-                <Route
-                  path={routing.basket}
-                  element={<TemplatePage title='Корзина' />}
-                />
+                <Route path={routing.basket} element={<BasketPage />} />
                 <Route
                   path='/services/:service'
                   element={<TemplatePage title='Сервис' />}
