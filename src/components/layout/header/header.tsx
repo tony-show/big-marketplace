@@ -47,7 +47,7 @@ const Header: ReactFC = () => {
             <i className='ic_map' />
             <div>Адреса</div>
           </Link>
-          <Link to={routing.login} className='header__link'>
+          <Link to={routing.account.index} className='header__link'>
             <i className='ic_user' />
             <div>Войти</div>
           </Link>
