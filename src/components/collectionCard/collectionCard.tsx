@@ -10,7 +10,7 @@ const CollectionCard: ReactFC<ICollectionCardProps> = ({ id }) => {
   return (
     <div className='collection-card'>
       <img
-        src={`https://picsum.photos/id/${id}/1920/1080`}
+        src={`https://placeimg.com/1920/1080/tech?id=${id}`}
         alt='Collection card'
       />
     </div>

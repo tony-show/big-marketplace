@@ -15,7 +15,7 @@ const productData: IProduct = {
   id: 1,
   name: 'MackBook Pro',
   brend: 'Apple',
-  cover: `https://picsum.photos/id/1/400/300`,
+  cover: `https://placeimg.com/400/300/tech?id=1`,
   price: Math.floor(Math.random() * 1000000),
   link: '/catalog/elektronika/telefony',
   sale: Math.floor(Math.random() * 100),

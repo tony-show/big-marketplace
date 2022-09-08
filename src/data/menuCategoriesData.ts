@@ -159,28 +159,36 @@ const categories: IMenuCategory[] = [
     route: '/catalog/dom',
     name: 'Дом',
     icon: IconsEnum.menu_home,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 5,
     route: '/catalog/kosmetika',
     name: 'Красота',
     icon: IconsEnum.menu_cosmetics,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 6,
     route: '/catalog/aksessuary',
     name: 'Аксессуары',
     icon: IconsEnum.menu_accessories,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 7,
     route: '/catalog/elektronika',
     name: 'Электроника',
     icon: IconsEnum.menu_electronic,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
     subCategories: [
       {
         id: 0,
@@ -209,140 +217,180 @@ const categories: IMenuCategory[] = [
     route: '/catalog/igrushki',
     name: 'Игрушки',
     icon: IconsEnum.menu_toys,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 9,
     route: '/catalog/tovary-dlya-vzroslyh',
     name: 'Товары для взрослых',
     icon: IconsEnum.menu_adult,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 10,
     route: '/catalog/produkty',
     name: 'Продукты',
     icon: IconsEnum.menu_product,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 11,
     route: '/catalog/bytovaya-tehnika',
     name: 'Бытовая техника',
     icon: IconsEnum.menu_technic,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 12,
     route: '/catalog/zoo-tovary',
     name: 'Зоо товары',
     icon: IconsEnum.menu_zoo,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 13,
     route: '/catalog/sport',
     name: 'Спорт',
     icon: IconsEnum.menu_sport,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 14,
     route: '/catalog/avtotovary',
     name: 'Автотовары',
     icon: IconsEnum.menu_auto,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 15,
     route: '/catalog/knigi',
     name: 'Книги',
     icon: IconsEnum.menu_books,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 16,
     route: '/catalog/premium',
     name: 'Премиум',
     icon: IconsEnum.menu_premium,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 17,
     route: '/catalog/yuvelirnye-izdeliya',
     name: 'Ювелирные изделия',
     icon: IconsEnum.menu_diamond,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 18,
     route: '/catalog/dlya-remonta',
     name: 'Для ремонта',
     icon: IconsEnum.menu_drill,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 19,
     route: '/catalog/mebel',
     name: 'Мебель',
     icon: IconsEnum.menu_furniture,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 20,
     route: '/catalog/sad-i-dacha',
     name: 'Сад и дача',
     icon: IconsEnum.menu_garden,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 21,
     route: '/catalog/zdorove',
     name: 'Здоровье',
     icon: IconsEnum.menu_health,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 22,
     route: '/catalog/kontstovary',
     name: 'Канцтовары',
     icon: IconsEnum.menu_office,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 23,
     route: '/catalog/cifrovye-tovary',
     name: 'Цифровые товары',
     icon: IconsEnum.menu_digital,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 24,
     route: '/catalog/akcyi',
     name: 'Акции',
     icon: IconsEnum.menu_discount,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 25,
     route: '/catalog/aviabilety',
     name: 'Авиабилеты',
     icon: IconsEnum.menu_avia_tickets,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 26,
     route: '/catalog/brendy',
     name: 'Бренды',
     icon: IconsEnum.menu_brand,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
   {
     id: 27,
     route: '/catalog/videoobzory',
     name: 'Видеообзоры',
     icon: IconsEnum.menu_review,
-    img: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/400`,
+    img: `https://placeimg.com/300/400/tech?id=${Math.floor(
+      Math.random() * 100
+    )}`,
   },
 ]
 export default categories

@@ -32,7 +32,7 @@ const MainPageSlider: ReactFC = () => {
       {[1, 2, 3, 4, 5].map((item) => (
         <SwiperSlide key={item}>
           <img
-            src={`https://picsum.photos/id/${item}/1920/300`}
+            src={`https://placeimg.com/1920/300/tech?id=${item}`}
             alt='Main page slide'
           />
         </SwiperSlide>

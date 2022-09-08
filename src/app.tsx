@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Footer from './components/layout/footer/footer'
 import Header from './components/layout/header/header'
 import Menu from './components/menu/menu'
+import AccountPage from './pages/accountPage'
 import BasketPage from './pages/basketPage/basketPage'
 import MainPage from './pages/mainPage/mainPage'
 import ProductPage from './pages/productPage/productPage'
@@ -32,10 +33,8 @@ const App: React.FC = () => {
                   path='/services/:service'
                   element={<TemplatePage title='Сервис' />}
                 />
-                <Route
-                  path='/lk/:page'
-                  element={<TemplatePage title='Личный кабинет' />}
-                />
+                <Route path='/account' element={<AccountPage />} />
+                <Route path='/account/:page' element={<AccountPage />} />
                 <Route path='/catalog/:category'>
                   <Route index element={<ProductsPage />} />
                   <Route path=':subCategory'>

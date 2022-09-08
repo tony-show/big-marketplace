@@ -1,0 +1,109 @@
+@import '../../../styles/settings.sass'
+
+.account-card
+  padding: 28px
+  box-shadow: $shadow
+  border-radius: $radius
+  background-color: $light
+  transition: all 0.3s ease-in-out
+  display: grid
+  align-items: end
+  &:hover
+    box-shadow: $shadowHover
+    color: $dark
+  &.gradient
+    background: $gradient_light
+    .account-card__img
+      background-color: transparent
+      color: $light
+      border: 3px solid rgba(255,255,255,0.85)
+  &__top
+    align-self: start
+    display: flex
+    align-items: center
+    gap: 16px
+  &__img
+    $size: 80px
+    width: $size
+    height: $size
+    border-radius: $size
+    background-color: $bg
+    color: $text
+    font-size: 32px
+    font-weight: 600
+    display: grid
+    align-items: center
+    justify-items: center
+    &.small
+      font-size: 24px
+      color: $primary
+      border: 3px solid $accent_light
+      background-color: transparent
+  &__title
+    h3
+      font-size: 20px
+      font-weight: 700
+      line-height: 1em
+      margin-bottom: 0
+    strong
+      font-size: 15px
+      line-height: 1em
+      color: $primary
+  &__notification
+    cursor: pointer
+    font-size: 22px
+    margin-left: auto
+    margin-bottom: auto
+    &.active,
+    &:hover
+      color: $primary
+  &__content
+    display: flex
+    flex-wrap: wrap
+    gap: 8px
+    align-items: center
+    justify-content: space-between
+    &.bottom
+      align-items: flex-end
+      .account-card__text strong
+        font-size: 22px
+        font-weight: 700
+        margin-left: 4px
+  &__text
+    line-height: 1em
+    span
+      color: $text
+      margin-right: 8px
+    strong
+      font-weight: 400
+  &__link
+    border-bottom: 1px dashed $dark
+    &:hover
+      color: $text
+      border-color: $text
+  &__sale
+    font-size: 20px
+    font-weight: 700
+    line-height: 1em
+    strong:first-child
+      padding-right: 8px
+      margin-right: 8px
+      border-right: 1px solid $borderColor
+  &__products
+    display: flex
+  &__product
+    $size: 60px
+    width: $size
+    height: $size
+    border-radius: $size
+    border: 1px solid $accent_light
+    overflow: hidden
+    display: grid
+    align-items: center
+    justify-items: center
+    font-size: 22px
+    background-color: $light
+    &:not(:first-child)
+      margin-left: -16px
+    img
+      width: 100%

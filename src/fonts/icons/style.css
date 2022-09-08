@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icons';
-  src:  url('fonts/icons.eot?hbb9ky');
-  src:  url('fonts/icons.eot?hbb9ky#iefix') format('embedded-opentype'),
-    url('fonts/icons.ttf?hbb9ky') format('truetype'),
-    url('fonts/icons.woff?hbb9ky') format('woff'),
-    url('fonts/icons.svg?hbb9ky#icons') format('svg');
+  src:  url('fonts/icons.eot?ai34b5');
+  src:  url('fonts/icons.eot?ai34b5#iefix') format('embedded-opentype'),
+    url('fonts/icons.ttf?ai34b5') format('truetype'),
+    url('fonts/icons.woff?ai34b5') format('woff'),
+    url('fonts/icons.svg?ai34b5#icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,33 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ic_notification-fill:before {
+  content: "\e91e";
+}
+.ic_shipping:before {
+  content: "\e919";
+}
+.ic_notification:before {
+  content: "\e917";
+}
+.ic_bag:before {
+  content: "\e916";
+}
+.ic_cash:before {
+  content: "\e918";
+}
+.ic_home:before {
+  content: "\e91a";
+}
+.ic_review:before {
+  content: "\e91c";
+}
+.ic_support:before {
+  content: "\e922";
+}
+.ic_user_outline:before {
+  content: "\e926";
+}
 .ic_heart-fill:before {
   content: "\e90f";
 }
