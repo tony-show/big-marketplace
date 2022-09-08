@@ -11,10 +11,19 @@ const routing = {
     faq: '/services/voprosy-i-otvety',
   },
   login: '/login',
-  lk: {
-    favorite: '/lk/favorite',
-    account: '/lk/account',
-    cards: '/lk/cards',
+  account: {
+    index: '/account',
+    favorite: '/account/favorite',
+    orders: '/account/orders',
+    support: '/account/support',
+    reviews: '/account/reviews',
+    wallet: '/account/wallet',
+    profile: '/account/profile',
+    shipping: '/account/shipping',
+    sale: '/account/sale',
+    cards: '/account/cards',
+    cheki: '/account/cheki',
+    brends: '/account/brends',
   },
   basket: '/basket',
 }
