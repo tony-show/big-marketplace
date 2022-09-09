@@ -1,12 +1,13 @@
 import SearchInput from '@src/components/searchInput/searchInput'
 import Selectbox from '@src/components/selectbox/selectbox'
 import { ReactFC } from '@src/interfaces/react'
-import ISelectboxItem, { SortTypeEnum } from '@src/interfaces/selectbox'
+import ISelectboxItem from '@src/interfaces/selectbox'
+import SortTypeEnum from '@src/interfaces/sort'
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import './favoriteActions.sass'
 
-const sortSelectboxData: ISelectboxItem[] = [
+const sortSelectboxData: ISelectboxItem<SortTypeEnum>[] = [
   {
     label: 'По дате добавления',
     value: SortTypeEnum.addDateDown,
@@ -28,13 +29,16 @@ const FavoriteActions: ReactFC<IFavoriteActionsProps> = ({
   onSort,
   onSearch,
 }) => {
-  const handleSortType = (sortTypeObj: ISelectboxItem) => {
+  const handleSortType = (sortTypeObj: ISelectboxItem<SortTypeEnum>) => {
     onSort(sortTypeObj.value)
   }
 
   return (
     <div className='favorite-actions'>
-      <Selectbox data={sortSelectboxData} onChange={handleSortType} />
+      <Selectbox<SortTypeEnum>
+        data={sortSelectboxData}
+        onChange={handleSortType}
+      />
       <Form.Check
         id='available'
         label='Снова в наличии'
