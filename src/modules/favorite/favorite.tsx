@@ -1,4 +1,5 @@
 import functionHelpers from '@src/helpers/functionHelpers'
+import sortHelpers from '@src/helpers/sortHelpers'
 import { ColorsEnum, IFavoriteProduct } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import SortTypeEnum from '@src/interfaces/sort'
@@ -59,39 +60,8 @@ const Favorite: ReactFC = () => {
   const [filteredProducts, setFilteredProducts] = useState(productsData)
 
   const onSort = (type: SortTypeEnum) => {
-    const sortedProducts = products.sort((a, b) => {
-      const dataA = {
-        date: a.addToFavoriteDate.valueOf(),
-        price: functionHelpers.getSalePrace(a.price, a.sale),
-        isAvailable: a.isAvailable,
-      }
-      const dataB = {
-        date: b.addToFavoriteDate.valueOf(),
-        price: functionHelpers.getSalePrace(b.price, b.sale),
-        isAvailable: b.isAvailable,
-      }
-
-      if (type === SortTypeEnum.addDateDown) {
-        return dataA.date > dataB.date ? -1 : 1
-      }
-      if (type === SortTypeEnum.addDateUp) {
-        return dataA.date < dataB.date ? -1 : 1
-      }
-      if (type === SortTypeEnum.priceDown) {
-        return dataA.price > dataB.price ? -1 : 1
-      }
-      if (type === SortTypeEnum.priceUp) {
-        return dataA.price < dataB.price ? -1 : 1
-      }
-      if (type === SortTypeEnum.available) {
-        return dataA.isAvailable > dataB.isAvailable ? -1 : 1
-      }
-      if (type === SortTypeEnum.notAvailable) {
-        return dataA.isAvailable < dataB.isAvailable ? -1 : 1
-      }
-      return 0
-    })
-    setFilteredProducts([...sortedProducts])
+    const sortedProducts = sortHelpers.sortFavoriteProducts(type, products)
+    setFilteredProducts(sortedProducts)
   }
 
   const onSearch = (value: string) => {
