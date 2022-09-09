@@ -1,12 +1,9 @@
-import { IFavoriteProduct } from '@src/interfaces/product'
+import IProduct from '@src/interfaces/product'
 import SortTypeEnum from '@src/interfaces/sort'
 import functionHelpers from './functionHelpers'
 
 const sortHelpers = {
-  sortFavoriteProducts: (
-    sortType: SortTypeEnum,
-    products: IFavoriteProduct[]
-  ) => {
+  sortFavoriteProducts: (sortType: SortTypeEnum, products: IProduct[]) => {
     products.sort((a, b) => {
       const dataA = {
         date: a.addToFavoriteDate.valueOf(),

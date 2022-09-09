@@ -1,7 +1,6 @@
-import Filters from '@src/components/filters/filters'
-import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
 import CustomPagination from '@src/components/pagination/pagination'
 import ProductCard from '@src/components/productCard/productCard'
+import generateProducts from '@src/data/products'
 import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React, { ReactNode } from 'react'
@@ -9,32 +8,11 @@ import './subCategoryPage.sass'
 
 const SubCategoryPage: ReactFC = () => {
   const renderProducts = (num: number) => {
+    const productsData = generateProducts(num)
     const products: ReactNode[] = []
-    for (let i = 0; i < num; i++) {
-      const finish = Math.floor(Math.random() * 100)
-      const name = 'IPhone 13 Pro Max  asd asd asd asda'.substring(0, finish)
-      const productData: IProduct = {
-        id: i,
-        name,
-        brend: 'Apple',
-        cover: `https://placeimg.com/400/300/tech?id=${i}`,
-        price: Math.floor(Math.random() * 1000000),
-        link: '/catalog/elektronika/telefony',
-        sale: Math.floor(Math.random() * 100),
-        color: 'black',
-        ram: '2 Гб',
-        ssd: '1 Тб',
-        rating: {
-          total: 3,
-          count: 19,
-        },
-        seller: 'OZON',
-        shipTime: 3,
-        bage: 'new',
-        credit: 'РАССРОЧКА ОТ 0-0-6!',
-      }
-      products.push(<ProductCard key={i} product={productData} />)
-    }
+    productsData.forEach((productData: IProduct) => {
+      products.push(<ProductCard key={productData.id} product={productData} />)
+    })
     return products
   }
 

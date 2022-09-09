@@ -1,30 +1,18 @@
 import functionHelpers from '@src/helpers/functionHelpers'
-import { ColorsEnum, IFavoriteProduct } from '@src/interfaces/product'
+import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './favoriteCard.sass'
 
 export interface IFavoriteCardProps {
-  product: IFavoriteProduct
+  product: IProduct
   onDelete: (id: number) => void
   toCart: (id: number) => void
 }
 
 const FavoriteCard: ReactFC<IFavoriteCardProps> = ({
-  product: {
-    id,
-    name,
-    brend,
-    price,
-    cover,
-    sale,
-    bage,
-    ram,
-    ssd,
-    color,
-    isAvailable,
-  },
+  product: { id, name, brend, price, cover, sale, bage, color, isAvailable },
   onDelete,
   toCart,
 }) => {

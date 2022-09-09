@@ -5,68 +5,16 @@ import BasketOrder, {
 import Button from '@src/components/button/button'
 import Panel from '@src/components/panel/panel'
 import Preloader from '@src/components/preloader/preloader'
+import generateProducts from '@src/data/products'
 import functionHelpers from '@src/helpers/functionHelpers'
-import { ColorsEnum, IBasketProduct } from '@src/interfaces/product'
+import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import moment from 'moment'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import './basketPage.sass'
 
-const productsData: IBasketProduct[] = [
-  {
-    id: 1,
-    name: 'MackBook Pro',
-    brend: 'Apple',
-    cover: `https://placeimg.com/400/300/tech?id=1`,
-    price: Math.floor(Math.random() * 1000000),
-    link: '/catalog/elektronika/telefony',
-    sale: Math.floor(Math.random() * 100),
-    color: 'black',
-    ram: '2 Гб',
-    ssd: '1 Тб',
-    rating: {
-      total: 3,
-      count: 19,
-    },
-    seller: 'OZON',
-    shipTime: 3,
-    bage: 'new',
-    credit: 'РАССРОЧКА ОТ 0-0-6!',
-    category: 'elektronika',
-    subCategory: 'noutbuki',
-    warehouse: 'Коледино WB',
-    selectedColor: 'black',
-    count: 1,
-    checked: true,
-  },
-  {
-    id: 2,
-    name: 'iPhone 13 Pro Max',
-    brend: 'Apple',
-    cover: `https://placeimg.com/400/300/tech?id=250`,
-    price: Math.floor(Math.random() * 1000000),
-    link: '/catalog/elektronika/telefony',
-    sale: Math.floor(Math.random() * 100),
-    color: 'black',
-    ram: '2 Гб',
-    ssd: '1 Тб',
-    rating: {
-      total: 3,
-      count: 19,
-    },
-    seller: 'OZON',
-    shipTime: 3,
-    bage: 'new',
-    credit: 'РАССРОЧКА ОТ 0-0-6!',
-    category: 'elektronika',
-    subCategory: 'noutbuki',
-    warehouse: 'Склад продавца',
-    selectedColor: 'white',
-    count: 1,
-    checked: true,
-  },
-]
+const productsData: IProduct[] = generateProducts(7)
 
 const ShipType = {
   postomat: 'Пункт выдачи',
@@ -74,7 +22,7 @@ const ShipType = {
 }
 
 const BasketPage: ReactFC = () => {
-  const [products, setProducts] = useState<IBasketProduct[]>(productsData)
+  const [products, setProducts] = useState<IProduct[]>(productsData)
   const [isOpenShipModal, setIsOpenShipModal] = useState(false)
   const [isOpenPayMethodModal, setIsOpenPayMethodModal] = useState(false)
   const [payMethod, setPayMethod] = useState(null)
@@ -110,13 +58,13 @@ const BasketPage: ReactFC = () => {
       saleSize: 0,
     }
     const countPrice = filteredProducts.reduce((total, item) => {
-      const totalPrice = item.price * item.count
+      const totalPrice = item.price * item.selectedCount
       const salePrice =
         total.salePrice + functionHelpers.getSalePrace(totalPrice, item.sale)
       const fullPrice = total.fullPrice + totalPrice
 
       return {
-        count: total.count + item.count,
+        count: total.count + item.selectedCount,
         salePrice,
         fullPrice,
         saleSize: fullPrice - salePrice,
@@ -196,9 +144,9 @@ const BasketPage: ReactFC = () => {
   }
 
   const changeCount = (id: number, count: number) => {
-    const updatedProducts = products.map((product: IBasketProduct) => {
+    const updatedProducts = products.map((product: IProduct) => {
       if (product.id === id) {
-        product.count = count
+        product.selectedCount = count
       }
       return product
     })

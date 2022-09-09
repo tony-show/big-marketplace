@@ -1,3 +1,4 @@
+import generateProducts from '@src/data/products'
 import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
@@ -6,29 +7,7 @@ import { Link, useMatch } from 'react-router-dom'
 import './account.sass'
 import AccountCard from './accountCard/accountCard'
 
-const product: IProduct = {
-  id: 1,
-  name: 'MackBook Pro',
-  brend: 'Apple',
-  cover: `https://placeimg.com/400/300/tech?id=1`,
-  price: Math.floor(Math.random() * 1000000),
-  link: '/catalog/elektronika/telefony',
-  sale: Math.floor(Math.random() * 100),
-  color: 'black',
-  ram: '2 Гб',
-  ssd: '1 Тб',
-  rating: {
-    total: 3,
-    count: 19,
-  },
-  seller: 'OZON',
-  shipTime: 3,
-  bage: 'new',
-  credit: 'РАССРОЧКА ОТ 0-0-6!',
-  category: 'elektronika',
-  subCategory: 'noutbuki',
-  warehouse: 'Коледино WB',
-}
+const product: IProduct = generateProducts(1)[0]
 
 const getProducts = (count: number): IProduct[] => {
   const products: IProduct[] = []
