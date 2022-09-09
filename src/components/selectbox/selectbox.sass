@@ -1,0 +1,60 @@
+@import '../../styles/settings.sass'
+
+.selectbox
+  cursor: pointer
+  width: 250px
+  font-size: 14px
+  position: relative
+  z-index: 2
+  &.open
+    .selectbox__selected-arrow
+      transform: rotate(-45deg)
+      top: 2px
+    .selectbox__list
+      display: block
+  &__selected
+    position: relative
+    z-index: 2
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: 8px 16px
+    border: 1px solid $borderColor
+    border-radius: calc($radius / 2)
+    background-color: $light
+    &-arrow
+      position: relative
+      top: -2px
+      $size: 10px
+      width: $size
+      height: $size
+      border-top: 1px solid $text
+      border-right: 1px solid $text
+      transform: rotate(135deg)
+      transition: all 0.3s ease-in-out
+  &__list
+    display: none
+    position: absolute
+    top: 115%
+    left: 0
+    right: 0
+    z-index: 1
+    border-radius: calc($radius / 2)
+    background-color: $light
+    box-shadow: $shadow
+    padding: 4px 8px
+
+  &__item
+    padding: 8px 16px
+    transition: all 0.3s ease-in-out
+    border-radius: calc($radius / 2)
+    &.selected
+      color: $primary
+      i
+        color: inherit
+    &:hover
+      background-color: $bg
+    i
+      color: $text
+      margin-left: 6px
+      font-size: 0.8em
