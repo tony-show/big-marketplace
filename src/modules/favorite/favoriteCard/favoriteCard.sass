@@ -1,0 +1,138 @@
+@import '../../../styles/settings.sass'
+
+$offset: 8px
+
+.favorite-card
+  padding: 16px
+  border-radius: $radius
+  position: relative
+  background-color: $light
+  &:hover
+    box-shadow: 0 0 20px rgb(36 36 36 / 10%)
+    z-index: 1
+    .favorite-card__actions
+      opacity: 1
+      pointer-events: all
+    .favorite-card__delete
+      opacity: 1
+  &__top
+    position: relative
+
+  &__bage
+    position: absolute
+    top: $offset
+    left: $offset
+    display: inline-block
+    background-color: #4dce3c
+    color: $light
+    padding: 2px 8px 0
+    border-radius: 50px
+    font-size: 14px
+    font-weight: 700
+    text-transform: uppercase
+
+  &__img
+    width: 100%
+    height: 16vw
+    border-radius: calc($radius / 2)
+    position: relative
+    overflow: hidden
+    img
+      height: 100%
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+  &__sale
+    display: inline-block
+    background: $gradient
+    border-radius: 100px
+    padding: 2px 8px
+    font-size: 12px
+    font-weight: 700
+    color: $dark
+    position: absolute
+    left: $offset
+    bottom: $offset
+  &__delete
+    $size: 30px
+    width: $size
+    height: $size
+    border-radius: $size
+    position: absolute
+    top: $offset
+    right: $offset
+    font-size: 14px
+    background-color: rgba(255,255,255,0.5)
+    color: $dark
+    opacity: 0
+    display: grid
+    align-items: center
+    justify-items: center
+
+  &__price
+    font-size: 18px
+    line-height: 1em
+    font-weight: 700
+    margin-top: 16px
+    color: $dark
+    span
+      text-decoration: line-through
+      font-size: 0.8em
+      font-weight: 400
+      opacity: 0.4
+      margin-left: 8px
+  &__params
+    color: $text
+    font-size: 14px
+    line-height: 1.2em
+    margin: 8px 0
+  &__rating
+    margin-bottom: 8px
+    display: flex
+    align-items: center
+    gap: 4px
+    i
+      color: $bg
+      &.fill
+        color: #ffd04e
+    span
+      font-size: 14px
+      margin-left: 4px
+      color: $text
+
+  &__shipping
+    font-size: 14px
+    color: $text
+    strong
+      color: $dark
+
+  &__credit
+    display: inline-block
+    padding: 4px 16px
+    font-size: 14px
+    background: $gradient_accent
+    border-radius: 100px
+    color: $light
+    margin-top: 8px
+
+  &__actions
+    display: flex
+    align-items: center
+    gap: 16px
+    margin-top: 16px
+    opacity: 0
+    pointer-events: none
+
+  &__bay
+    cursor: pointer
+    border-radius: 5px
+    background: $gradient
+    color: $dark
+    padding: 8px 20px
+    font-weight: 600
+
+  &__favorite
+    cursor: pointer
+    font-size: 22px
+    color: $accent

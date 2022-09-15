@@ -1,6 +1,7 @@
 import CollectionCard from '@src/components/collectionCard/collectionCard'
 import MainPageSlider from '@src/components/mainPageSlider/mainPageSlider'
 import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
+import generateProducts from '@src/data/products'
 import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React, { ReactNode, useState } from 'react'
@@ -24,30 +25,11 @@ const MainPage: ReactFC = () => {
   }
 
   const renderProducts = (num: number) => {
+    const productsData = generateProducts(num)
     const products: ReactNode[] = []
-    for (let i = 0; i < num; i++) {
-      const finish = Math.floor(Math.random() * 100)
-      const name = 'IPhone 13 Pro Max  asd asd asd asda'.substring(0, finish)
-      const productData: IProduct = {
-        id: i,
-        name,
-        brend: 'Apple',
-        cover: `https://placeimg.com/300/500/tech?id=${i}`,
-        price: Math.floor(Math.random() * 1000000),
-        link: '/catalog/elektronika/telefony',
-        sale: Math.floor(Math.random() * 100),
-        color: 'black',
-        ram: '2 Гб',
-        ssd: '1 Тб',
-        rating: {
-          total: 5,
-          count: 19,
-        },
-        seller: 'OZON',
-        shipTime: 3,
-      }
+    productsData.forEach((productData: IProduct) => {
       products.push(<MiniProductCard product={productData} />)
-    }
+    })
     return products
   }
 

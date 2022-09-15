@@ -10,29 +10,9 @@ import { ReactFC } from '@src/interfaces/react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './productPage.sass'
+import generateProducts from '@src/data/products'
 
-const productData: IProduct = {
-  id: 1,
-  name: 'MackBook Pro',
-  brend: 'Apple',
-  cover: `https://placeimg.com/400/300/tech?id=1`,
-  price: Math.floor(Math.random() * 1000000),
-  link: '/catalog/elektronika/telefony',
-  sale: Math.floor(Math.random() * 100),
-  color: 'black',
-  ram: '2 Гб',
-  ssd: '1 Тб',
-  rating: {
-    total: 3,
-    count: 19,
-  },
-  seller: 'OZON',
-  shipTime: 3,
-  bage: 'new',
-  credit: 'РАССРОЧКА ОТ 0-0-6!',
-  category: 'elektronika',
-  subCategory: 'noutbuki',
-}
+const productData: IProduct = generateProducts(1)[0]
 
 const ProductPage: ReactFC = () => {
   const { id } = useParams()

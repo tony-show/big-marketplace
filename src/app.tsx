@@ -6,6 +6,7 @@ import Header from './components/layout/header/header'
 import Menu from './components/menu/menu'
 import AccountPage from './pages/accountPage'
 import BasketPage from './pages/basketPage/basketPage'
+import FavoritePage from './pages/favoritePage'
 import MainPage from './pages/mainPage/mainPage'
 import ProductPage from './pages/productPage/productPage'
 import ProductsPage from './pages/productsPage/productsPage'
@@ -33,8 +34,11 @@ const App: React.FC = () => {
                   path='/services/:service'
                   element={<TemplatePage title='Сервис' />}
                 />
-                <Route path='/account' element={<AccountPage />} />
-                <Route path='/account/:page' element={<AccountPage />} />
+                <Route path='/account'>
+                  <Route index element={<AccountPage />} />
+                  <Route path='favorite' element={<FavoritePage />} />
+                  <Route path=':page' element={<AccountPage />} />
+                </Route>
                 <Route path='/catalog/:category'>
                   <Route index element={<ProductsPage />} />
                   <Route path=':subCategory'>

@@ -1,0 +1,14 @@
+@import '../../styles/settings.sass'
+
+$margin: 64px
+
+.favorite
+  &__content
+    margin-top: 32px
+  &__products
+    padding-top: $margin
+    display: grid
+    grid-template-columns: repeat(5, 1fr)
+    grid-gap: 16px
+    .favorite-card
+      margin-top: -$margin
