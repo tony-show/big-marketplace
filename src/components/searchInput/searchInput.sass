@@ -1,0 +1,27 @@
+@import '../../styles/settings.sass'
+
+.search-input
+  width: 500px
+  &__input
+    padding: 8px 16px
+    border-radius: calc($radius / 2)
+    background-color: $bg
+    display: flex
+    align-items: center
+    justify-content: space-between
+    outline: 0px solid $accent
+    gap: 20px
+    transition: all 0.1s ease-in-out
+    &:focus-within
+      background-color: $light
+      outline-width: 2px
+    input
+      background: none
+      border: none
+      outline: none
+      flex-grow: 1
+    i
+      font-size: 20px
+      &.ic_close
+        font-size: 16px
+        cursor: pointer

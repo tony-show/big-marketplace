@@ -1,3 +1,4 @@
+import { Moment } from 'moment'
 import IRating from './rating'
 
 export enum ColorsEnum {
@@ -49,6 +50,11 @@ interface IProduct {
   subCategory?: string
   innerSubCategory?: string
   warehouse?: string
+  selectedColor?: keyof typeof ColorsEnum
+  selectedCount: number
+  checked: boolean
+  isAvailable: boolean
+  addToFavoriteDate: Moment
 }
 export default IProduct
 
@@ -58,10 +64,4 @@ export interface IInformationList {
     label: string
     value: string
   }[]
-}
-
-export interface IBasketProduct extends IProduct {
-  selectedColor?: keyof typeof ColorsEnum
-  count: number
-  checked: boolean
 }

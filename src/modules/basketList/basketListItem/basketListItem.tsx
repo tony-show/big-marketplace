@@ -1,6 +1,6 @@
 import SelectCount from '@src/components/selectCount/selectCount'
 import functionHelpers from '@src/helpers/functionHelpers'
-import { ColorsEnum, IBasketProduct } from '@src/interfaces/product'
+import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React from 'react'
 import { Form } from 'react-bootstrap'
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import './basketListItem.sass'
 
 interface IBasketListItemProps {
-  product: IBasketProduct
+  product: IProduct
   toFavorite: (id: number) => void
   onDelete: (id: number) => void
   changeCount: (id: number, count: number) => void
@@ -24,13 +24,13 @@ const BasketListItem: ReactFC<IBasketListItemProps> = ({
 }) => {
   const getPriceWithSale = () => {
     const priceWithSale = functionHelpers.getSalePrace(
-      product.price * product.count,
+      product.price * product.selectedCount,
       product.sale
     )
     return functionHelpers.getDigitNumber(priceWithSale)
   }
   const getFullPrice = () => {
-    const fullPrice = product.price * product.count
+    const fullPrice = product.price * product.selectedCount
     return functionHelpers.getDigitNumber(fullPrice)
   }
 
@@ -64,7 +64,7 @@ const BasketListItem: ReactFC<IBasketListItemProps> = ({
       <div className='basket-product__actions'>
         <SelectCount
           min={1}
-          initial={product.count}
+          initial={product.selectedCount}
           onChange={(count) => {
             changeCount(product.id, count)
           }}
