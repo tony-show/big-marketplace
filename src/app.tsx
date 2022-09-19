@@ -8,6 +8,7 @@ import AccountPage from './pages/accountPage'
 import BasketPage from './pages/basketPage/basketPage'
 import FavoritePage from './pages/favoritePage'
 import MainPage from './pages/mainPage/mainPage'
+import OrdersPage from './pages/ordersPage'
 import ProductPage from './pages/productPage/productPage'
 import ProductsPage from './pages/productsPage/productsPage'
 import TemplatePage from './pages/tamplatePage'
@@ -30,6 +31,7 @@ const App: React.FC = () => {
                   element={<TemplatePage title='Вход' />}
                 />
                 <Route path={routing.basket} element={<BasketPage />} />
+                <Route path={routing.account.orders} element={<OrdersPage />} />
                 <Route
                   path='/services/:service'
                   element={<TemplatePage title='Сервис' />}

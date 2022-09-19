@@ -1,0 +1,15 @@
+@import '../../styles/settings.sass'
+
+$margin: 64px
+
+.orders-page
+  &__content
+    margin-top: 32px
+  &__products
+    padding-top: $margin
+    display: grid
+    grid-template-columns: repeat(5, 1fr)
+    grid-auto-rows: 324px
+    grid-gap: 16px
+    .order-card
+      margin-top: -$margin
