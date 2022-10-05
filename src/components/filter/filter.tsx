@@ -1,56 +1,96 @@
-import { ColorsEnum } from '@src/interfaces/product'
+import { useAppSelector } from '@src/hooks/redux'
+import { ICheckRadio, IColor, IRange } from '@src/interfaces/filters'
 import { ReactFC } from '@src/interfaces/react'
 import React, { useState } from 'react'
 import { Form, InputGroup } from 'react-bootstrap'
 import './filter.sass'
 
-export interface ICheckRadio {
-  id: number
-  label: string
-  value: string | number
-}
-export interface IRange {
-  from: number
-  to: number
-}
-export type IColor = keyof typeof ColorsEnum
-
 interface IFilterProps {
   type: 'radio' | 'checkbox' | 'range' | 'color'
   label: string
   data: ICheckRadio[] | IRange | IColor[]
+  selectedData?: IColor[] | ICheckRadio[]
+  onChange?: (data: ICheckRadio | IRange | IColor | number) => void
 }
 
-const Filter: ReactFC<IFilterProps> = ({ type, label, data }) => {
+const Filter: ReactFC<IFilterProps> = ({
+  type,
+  label,
+  data,
+  onChange,
+  selectedData,
+}) => {
+  const { partFilteredProducts } = useAppSelector((state) => state.products)
   const [isClose, setIsClose] = useState(false)
   const [isHideSearch, setIsHideSearch] = useState(true)
   const [searchValue, setSearchValue] = useState('')
+  const [range, setRange] = useState<IRange>(data as IRange)
 
   const renderColors = (_data: IColor[]) => {
+    const selectedColors = selectedData
     const colorsHtml = _data.map((color) => (
       <div
         key={color}
-        className='filter__color'
+        className={`filter__color ${
+          selectedColors.some((c) => c === color) ? 'selected' : ''
+        }`}
         style={{
           backgroundColor: color,
         }}
+        onClick={() => onChange(color)}
       />
     ))
     return <div className='filter__colors'>{colorsHtml}</div>
   }
 
-  const renderRange = ({ from, to }: IRange) => {
+  const renderRange = () => {
     return (
       <div className='filter__range'>
         <InputGroup className='mb-3'>
-          <Form.Control aria-label='First name' defaultValue={from} />
-          <Form.Control aria-label='Last name' defaultValue={to} />
+          {['from', 'to'].map((name) => (
+            <Form.Control
+              key={name}
+              value={range[name]}
+              onChange={(e) => {
+                setRange({
+                  ...range,
+                  [name]: /^\d{0,7}$/.test(e.target.value)
+                    ? +e.target.value
+                    : range[name],
+                })
+              }}
+              onKeyUp={({ key }) => (key === 'Enter' ? onChange(range) : false)}
+              onBlur={() => onChange(range)}
+            />
+          ))}
         </InputGroup>
       </div>
     )
   }
 
-  const renderCheckRadio = (_data: ICheckRadio[], isRadio = false) => {
+  const renderRadio = (_data: ICheckRadio[]) => {
+    const groupName = String(Math.random() * 1000000)
+    const list = _data.map(({ id, label: name, value }) => (
+      <Form.Check
+        key={id}
+        type='radio'
+        name={groupName}
+        id={`${groupName}-${id}`}
+        label={name}
+        value={value}
+        onChange={() => onChange(+value)}
+      />
+    ))
+
+    return (
+      <div className='filter__list'>
+        <div className='filter__list-content'>{list}</div>
+      </div>
+    )
+  }
+
+  const renderCheckbox = (_data: ICheckRadio[], isRadio = false) => {
+    const selectedCheckboxes = selectedData as ICheckRadio[]
     const groupName = String(Math.random() * 1000000)
     const reg = new RegExp(searchValue, 'i')
     const isBigData = _data.length > 7
@@ -59,16 +99,24 @@ const Filter: ReactFC<IFilterProps> = ({ type, label, data }) => {
 
     for (let i = 0; i < filteredData.length; i++) {
       if (isHideSearch && i > 6) break
-      list.push(
-        <Form.Check
-          key={filteredData[i].id}
-          type={isRadio ? 'radio' : 'checkbox'}
-          name={groupName}
-          id={`${groupName}-${filteredData[i].id}`}
-          label={filteredData[i].label}
-          value={filteredData[i].value}
-        />
-      )
+      const { id, label: name, value } = filteredData[i]
+      const avalibleCount = partFilteredProducts.reduce((count, product) => {
+        return product.brend.value === value ? count + 1 : count
+      }, 0)
+      if (avalibleCount) {
+        list.push(
+          <Form.Check
+            key={id}
+            type={isRadio ? 'radio' : 'checkbox'}
+            checked={selectedCheckboxes.some((item) => item.value === value)}
+            onChange={() => onChange(filteredData[i])}
+            name={groupName}
+            id={`${groupName}-${id}`}
+            label={`${name} (${avalibleCount})`}
+            value={value}
+          />
+        )
+      }
     }
 
     return (
@@ -102,9 +150,9 @@ const Filter: ReactFC<IFilterProps> = ({ type, label, data }) => {
       </div>
       <div className='filter__content'>
         {type === 'color' && renderColors(data as IColor[])}
-        {type === 'range' && renderRange(data as IRange)}
-        {type === 'radio' && renderCheckRadio(data as ICheckRadio[], true)}
-        {type === 'checkbox' && renderCheckRadio(data as ICheckRadio[])}
+        {type === 'range' && renderRange()}
+        {type === 'radio' && renderRadio(data as ICheckRadio[])}
+        {type === 'checkbox' && renderCheckbox(data as ICheckRadio[])}
       </div>
     </div>
   )
