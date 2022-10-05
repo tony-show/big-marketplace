@@ -1,5 +1,5 @@
 import { Moment } from 'moment'
-import OrderFilterTypeEnum from './filters'
+import OrderFilterTypeEnum, { ICheckRadio } from './filters'
 import IRating from './rating'
 
 export enum ColorsEnum {
@@ -16,7 +16,7 @@ interface IProduct {
   name: string
   cover: string
   price: number
-  brend: string
+  brend: ICheckRadio
   link: string
   sale?: number
   rating: IRating

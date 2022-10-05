@@ -27,7 +27,7 @@ const FixedPanel: ReactFC<IFixedPanelProps> = ({ product }) => {
         <img src={product.cover} alt='Товар' className='fixed-panel__img' />
         <div className='fixed-panel__main'>
           <div className='fixed-panel__title'>
-            <strong>{product.brend}</strong>
+            <strong>{product.brend.label}</strong>
             <span>
               / {product.name} / {product.ram} / {product.ssd} / {product.color}
             </span>
