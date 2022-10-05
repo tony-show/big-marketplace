@@ -30,14 +30,15 @@
     grid-template-columns: repeat(auto-fill, 30px)
     grid-gap: 8px
   &__color
+    cursor: pointer
     $size: 30px
     width: $size
     height: $size
     border-radius: $size
     position: relative
-    &:hover::after
+    outline: 1px solid #ddd
+    &.selected::after
       $offset: -4px
-      cursor: pointer
       content: ''
       display: block
       position: absolute
