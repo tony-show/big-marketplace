@@ -27,7 +27,7 @@ const MiniProductCard: ReactFC<IMiniProductCardProps> = ({
         <span>{originalPrice} ₽</span>
       </div>
       <div className='mini-product-card__link'>
-        {brend} / {name}
+        {brend.label} / {name}
       </div>
     </Link>
   )
