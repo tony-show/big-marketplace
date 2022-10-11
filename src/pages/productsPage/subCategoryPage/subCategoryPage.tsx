@@ -113,8 +113,8 @@ const SubCategoryPage: ReactFC = () => {
               viewType === 'big' ? 'big' : ''
             }`}
           >
-          </div>
             {renderProducts()}
+          </div>
           <CustomPagination />
         </>
       )}
