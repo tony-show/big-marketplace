@@ -26,6 +26,8 @@ const ProductCard: ReactFC<IMiniProductCardProps> = ({
     shipTime,
     credit,
     rating,
+    soldCount,
+    updated,
   },
 }) => {
   const [toFavorite, setToFavorite] = useState(false)
@@ -78,10 +80,18 @@ const ProductCard: ReactFC<IMiniProductCardProps> = ({
         <div className='product-card__params'>
           {brend.value} / {name} / {ram} / {ssd} / {ColorsEnum[color]}
         </div>
+        <div className='product-card__sold-count'>
+          <span>Продано:</span>
+          <strong>{soldCount}</strong>
+        </div>
         <div className='product-card__rating'>{renderRating(rating)}</div>
         <div className='product-card__shipping'>
           <span>Доставка:&nbsp;</span>
           <strong>{shipDate}</strong>
+        </div>
+        <div className='product-card__shipping'>
+          <span>Обновлен:&nbsp;</span>
+          <strong>{moment(updated).format('DD.MM.YYYY')}</strong>
         </div>
         <div className='product-card__credit'>{credit}</div>
         <div className='product-card__actions'>

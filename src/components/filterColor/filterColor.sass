@@ -1,10 +1,10 @@
 @import '../../styles/settings.sass'
 
-.filter
+.filter-color
   &.close
-    .filter__close-btn
+    .filter-color__close-btn
       transform: rotate(135deg)
-    .filter__content
+    .filter-color__content
       display: none
   &__head
     cursor: pointer
@@ -48,17 +48,10 @@
       bottom: $offset
       border-radius: $size
       border: 2px solid $accent
-  &__list
-    display: grid
-    grid-gap: 4px
-  &__list-content
-    max-height: 200px
-    overflow: auto
-  &__search
-    margin-bottom: 8px
-  &__more
-    cursor: pointer
+  &__clear
     color: $text
+    border-bottom: 1px dashed $text
+    font-size: 14px !important
+    font-weight: 400 !important
     margin-right: auto
-    margin-top: 4px
-    border-bottom: 1px dashed $dark
+    margin-left: 12px

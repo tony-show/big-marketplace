@@ -55,10 +55,12 @@ interface IProduct {
   selectedCount: number
   checked: boolean
   isAvailable: boolean
-  addToFavoriteDate: Moment
-  orderDate?: Moment
-  getDate?: Moment
+  addToFavoriteDate: number
+  orderDate?: number
+  getDate?: number
   orderStatus?: OrderFilterTypeEnum
+  soldCount: number
+  updated: number
 }
 export default IProduct
 
