@@ -20,7 +20,7 @@ const SubCategoryPage: ReactFC = () => {
   const isPriceSortType =
     sortType === SortTypeEnum.priceUp || sortType === SortTypeEnum.priceDown
 
-  const renderProducts = (num: number) => {
+  const renderProducts = () => {
     const products: ReactNode[] = []
     const sortFilteredProducts = sortHelpers.sortProducts(
       sortType,
@@ -113,8 +113,8 @@ const SubCategoryPage: ReactFC = () => {
               viewType === 'big' ? 'big' : ''
             }`}
           >
-            {renderProducts(40)}
           </div>
+            {renderProducts()}
           <CustomPagination />
         </>
       )}
