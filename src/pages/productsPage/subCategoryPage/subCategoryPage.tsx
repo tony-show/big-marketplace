@@ -1,6 +1,5 @@
 import CustomPagination from '@src/components/pagination/pagination'
 import ProductCard from '@src/components/productCard/productCard'
-import generateProducts from '@src/data/products'
 import { useAppSelector } from '@src/hooks/redux'
 import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
@@ -10,7 +9,7 @@ import './subCategoryPage.sass'
 const SubCategoryPage: ReactFC = () => {
   const { filteredProducts } = useAppSelector((state) => state.products)
 
-  const renderProducts = (num: number) => {
+  const renderProducts = () => {
     const products: ReactNode[] = []
     filteredProducts.forEach((product: IProduct) => {
       products.push(<ProductCard key={product.id} product={product} />)
@@ -39,9 +38,7 @@ const SubCategoryPage: ReactFC = () => {
       </div>
       {!!filteredProducts.length && (
         <>
-          <div className='sub-category-page__products'>
-            {renderProducts(40)}
-          </div>
+          <div className='sub-category-page__products'>{renderProducts()}</div>
           <CustomPagination />
         </>
       )}
