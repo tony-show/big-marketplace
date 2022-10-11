@@ -25,10 +25,12 @@ const generateProducts = (num: number) => {
   for (let i = 0; i < num; i++) {
     const names = ['IPhone 13 Pro Max', 'Mackbook Pro', 'Super Vision']
     const colors = ['black', 'blue', 'green', 'yellow', 'red', 'white']
+    const ratingTotalNums: (1 | 2 | 3 | 4 | 5)[] = [1, 2, 3, 4, 5]
     const nameId = Math.floor(Math.random() * names.length)
     const brendId = Math.floor(Math.random() * brends.length)
     const colorId = Math.floor(Math.random() * colors.length)
     const date = moment(Date.now() - Math.floor(Math.random() * 1000000000))
+    const ratingTotalId = Math.floor(Math.random() * ratingTotalNums.length)
     const productData: IProduct = {
       id: i,
       name: names[nameId],
@@ -47,8 +49,8 @@ const generateProducts = (num: number) => {
       ram: '2 Гб',
       ssd: '1 Тб',
       rating: {
-        total: 3,
-        count: 19,
+        total: ratingTotalNums[ratingTotalId],
+        count: Math.floor(Math.random() * 100),
       },
       seller: 'OZON',
       shipTime: 3,
@@ -62,6 +64,8 @@ const generateProducts = (num: number) => {
       orderDate: date,
       getDate: date.add(3, 'day'),
       orderStatus: Math.floor(Math.random() * 5),
+      soldCount: Math.floor(Math.random() * 100),
+      updated: +date - Math.floor(Math.random() * 10000000000),
     }
     products.push(productData)
   }
