@@ -2,9 +2,9 @@ import { ReactFC } from '@src/interfaces/react'
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ICheckRadio, IColor, IRange } from '@src/interfaces/filters'
+import { setFilters } from '@src/store/productsStore/productsStore'
 import Filter from '../filter/filter'
 import './filters.sass'
-import { setFilters } from '@src/store/productsStore/productsStore'
 
 const sales: ICheckRadio[] = [
   { id: 1, label: 'от 10% и выше', value: 10 },
