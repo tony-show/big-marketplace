@@ -1,0 +1,41 @@
+@import '../../styles/settings.sass'
+
+.filter-radio
+  &.close
+    .filter-radio__close-btn
+      transform: rotate(135deg)
+    .filter-radio__content
+      display: none
+  &__head
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-bottom: 16px
+    span
+      font-weight: 700
+      font-size: 18px
+  &__close-btn
+    $size: 8px
+    width: $size
+    height: $size
+    cursor: pointer
+    border-top: 2px solid $text
+    border-right: 2px solid $text
+    opacity: 0.6
+    transition: all 0.3s ease-in-out
+    transform: rotate(-45deg)
+  &__list
+    display: grid
+    grid-gap: 4px
+  &__list-content
+    max-height: 200px
+    overflow: auto
+    padding-left: 4px
+  &__clear
+    color: $text
+    border-bottom: 1px dashed $text
+    font-size: 14px !important
+    font-weight: 400 !important
+    margin-right: auto
+    margin-left: 12px
