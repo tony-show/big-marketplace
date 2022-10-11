@@ -59,6 +59,8 @@ interface IProduct {
   orderDate?: number
   getDate?: number
   orderStatus?: OrderFilterTypeEnum
+  soldCount: number
+  updated: number
 }
 export default IProduct
 

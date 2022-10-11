@@ -5,5 +5,9 @@ enum SortTypeEnum {
   priceDown,
   available,
   notAvailable,
+  popular,
+  rating,
+  sale,
+  update,
 }
 export default SortTypeEnum
