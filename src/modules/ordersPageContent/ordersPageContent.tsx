@@ -1,38 +1,34 @@
-import generateProducts from '@src/data/products'
 import { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React, { useEffect, useState } from 'react'
 import './ordersPageContent.sass'
 import OrderFilterTypeEnum from '@src/interfaces/filters'
+import { useAppSelector } from '@src/hooks/redux'
 import OrdersPageActions from './ordersPageActions/ordersPageActions'
 import OrderCard from './orderCard/orderCard'
 
-const productsData = generateProducts(10)
-
 const OrdersPageContent: ReactFC = () => {
-  const [products, setProducts] = useState(productsData)
-  const [filteredProducts, setFilteredProducts] = useState(products)
+  const { bayed } = useAppSelector((state) => state.user)
+  const [filteredProducts, setFilteredProducts] = useState(bayed)
   const [statusType, setStatusType] = useState<OrderFilterTypeEnum>(0)
 
   const onFiltering = (type: OrderFilterTypeEnum) => {
     setStatusType(type)
     if (type) {
-      const filtered = products.filter(
-        (product) => product.orderStatus === type
-      )
+      const filtered = bayed.filter((product) => product.orderStatus === type)
       setFilteredProducts(filtered)
     } else {
-      setFilteredProducts(products)
+      setFilteredProducts(bayed)
     }
   }
 
   useEffect(() => {
     onFiltering(statusType)
-  }, [products])
+  }, [bayed])
 
   const onSearch = (value: string) => {
     const reg = new RegExp(value, 'i')
-    const searchedProducts = products.filter((product) => {
+    const searchedProducts = bayed.filter((product) => {
       return (
         reg.test(product.name) ||
         reg.test(product.brend.label) ||
@@ -45,12 +41,6 @@ const OrdersPageContent: ReactFC = () => {
   const addReview = (id: number) => {
     alert('Добавление отзыва!')
   }
-
-  const onHideProduct = (id: number) => {
-    const updateProducts = products.filter((product) => product.id !== id)
-    setProducts(updateProducts)
-  }
-
   return (
     <div className='orders-page'>
       <OrdersPageActions onFiltering={onFiltering} onSearch={onSearch} />
@@ -63,7 +53,6 @@ const OrdersPageContent: ReactFC = () => {
                 key={product.id}
                 product={product}
                 addReview={addReview}
-                onHide={onHideProduct}
               />
             ))}
           </div>
