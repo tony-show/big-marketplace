@@ -49,6 +49,7 @@ const Menu: ReactFC = () => {
       if (parentCategory && subCategories) {
         return (
           <span
+            key={id}
             onClick={() =>
               handleCategory({
                 category: item,
