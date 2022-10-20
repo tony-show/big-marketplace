@@ -1,7 +1,10 @@
 import functionHelpers from '@src/helpers/functionHelpers'
+import priceHelpers from '@src/helpers/priceHelpers'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import IRating from '@src/interfaces/rating'
 import { ReactFC } from '@src/interfaces/react'
+import { addToBasket, addToFavorite } from '@src/store/userStore/userStore'
 import moment from 'moment'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -11,8 +14,8 @@ export interface IMiniProductCardProps {
   product: IProduct
 }
 
-const ProductCard: ReactFC<IMiniProductCardProps> = ({
-  product: {
+const ProductCard: ReactFC<IMiniProductCardProps> = ({ product }) => {
+  const {
     id,
     name,
     brend,
@@ -28,11 +31,11 @@ const ProductCard: ReactFC<IMiniProductCardProps> = ({
     rating,
     soldCount,
     updated,
-  },
-}) => {
-  const [toFavorite, setToFavorite] = useState(false)
+  } = product
+  const dispatch = useAppDispatch()
+  const { favorite } = useAppSelector((state) => state.user)
   const originalPrice = functionHelpers.getDigitNumber(price)
-  let priceWithSale: string | number = functionHelpers.getSalePrace(price, sale)
+  let priceWithSale: string | number = priceHelpers.getSalePrace(price, sale)
   priceWithSale = functionHelpers.getDigitNumber(priceWithSale)
   const shipDate = moment().locale('ru').add(shipTime, 'd').format('DD MMMM')
 
@@ -56,12 +59,13 @@ const ProductCard: ReactFC<IMiniProductCardProps> = ({
   const toFavoriteHandle = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    setToFavorite(!toFavorite)
+    dispatch(addToFavorite(product))
   }
 
   const addToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
+    dispatch(addToBasket(product))
     alert('Товар добавлен в корзину!')
   }
 
@@ -100,7 +104,11 @@ const ProductCard: ReactFC<IMiniProductCardProps> = ({
           </div>
           <div className='product-card__favorite'>
             <i
-              className={toFavorite ? 'ic_heart-fill' : 'ic_heart'}
+              className={
+                favorite.some((prod) => prod.id === id)
+                  ? 'ic_heart-fill'
+                  : 'ic_heart'
+              }
               onClick={toFavoriteHandle}
             />
           </div>
