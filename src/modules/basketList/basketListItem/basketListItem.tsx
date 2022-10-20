@@ -1,7 +1,15 @@
 import SelectCount from '@src/components/selectCount/selectCount'
 import functionHelpers from '@src/helpers/functionHelpers'
+import priceHelpers from '@src/helpers/priceHelpers'
+import { useAppDispatch } from '@src/hooks/redux'
 import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
+import {
+  addToFavorite,
+  changeProductInOrderStatus,
+  changeSelectedProductCount,
+  deleteFromBasket,
+} from '@src/store/userStore/userStore'
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -9,21 +17,12 @@ import './basketListItem.sass'
 
 interface IBasketListItemProps {
   product: IProduct
-  toFavorite: (id: number) => void
-  onDelete: (id: number) => void
-  changeCount: (id: number, count: number) => void
-  onChacked: (id: number, checked: boolean) => void
 }
 
-const BasketListItem: ReactFC<IBasketListItemProps> = ({
-  product,
-  toFavorite,
-  onDelete,
-  changeCount,
-  onChacked,
-}) => {
+const BasketListItem: ReactFC<IBasketListItemProps> = ({ product }) => {
+  const dispatch = useAppDispatch()
   const getPriceWithSale = () => {
-    const priceWithSale = functionHelpers.getSalePrace(
+    const priceWithSale = priceHelpers.getSalePrace(
       product.price * product.selectedCount,
       product.sale
     )
@@ -34,16 +33,17 @@ const BasketListItem: ReactFC<IBasketListItemProps> = ({
     return functionHelpers.getDigitNumber(fullPrice)
   }
 
-  const changeChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChacked(product.id, e.target.checked)
+  const toFavorite = () => {
+    dispatch(addToFavorite(product))
+    alert('Товар добавлен в избранное!')
   }
 
   return (
     <div className='basket-product'>
       <Form.Check
         type='checkbox'
-        onChange={changeChecked}
-        checked={product.checked}
+        onChange={() => dispatch(changeProductInOrderStatus(product.id))}
+        checked={product.inOrder}
       />
       <Link to={`/product/${product.id}`}>
         <img
@@ -65,13 +65,20 @@ const BasketListItem: ReactFC<IBasketListItemProps> = ({
         <SelectCount
           min={1}
           initial={product.selectedCount}
-          onChange={(count) => {
-            changeCount(product.id, count)
-          }}
+          onChange={(count) =>
+            dispatch(
+              changeSelectedProductCount({
+                id: product.id,
+                count,
+              })
+            )
+          }
         />
         <div className='basket-product__links'>
-          <span onClick={() => toFavorite(product.id)}>В избранное</span>
-          <span onClick={() => onDelete(product.id)}>Удалить</span>
+          <span onClick={toFavorite}>В избранное</span>
+          <span onClick={() => dispatch(deleteFromBasket(product.id))}>
+            Удалить
+          </span>
         </div>
       </div>
       <div className='basket-product__price'>
