@@ -1,10 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import generateProducts from '@src/data/products'
 import { PaymentTypeEnum } from '@src/interfaces/payment'
 import IProduct from '@src/interfaces/product'
 import ShippingTypeEnum from '@src/interfaces/shipping'
-
-const products = generateProducts(3)
 
 interface IProductsState {
   data: {
