@@ -1,4 +1,5 @@
 import functionHelpers from '@src/helpers/functionHelpers'
+import priceHelpers from '@src/helpers/priceHelpers'
 import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React from 'react'
@@ -10,10 +11,10 @@ export interface IMiniProductCardProps {
 }
 
 const MiniProductCard: ReactFC<IMiniProductCardProps> = ({
-  product: { id, name, link, brend, price, cover, sale },
+  product: { name, link, brend, price, cover, sale },
 }) => {
   const originalPrice = functionHelpers.getDigitNumber(price)
-  let priceWithSale: string | number = functionHelpers.getSalePrace(price, sale)
+  let priceWithSale: string | number = priceHelpers.getSalePrace(price, sale)
   priceWithSale = functionHelpers.getDigitNumber(priceWithSale)
 
   return (

@@ -1,52 +1,24 @@
 import functionHelpers from '@src/helpers/functionHelpers'
-import IProduct from '@src/interfaces/product'
+import priceHelpers from '@src/helpers/priceHelpers'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
+import { changeAllInOrderStatus } from '@src/store/userStore/userStore'
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import './basketList.sass'
 import BasketListItem from './basketListItem/basketListItem'
 
-interface IBasketListProps {
-  products: IProduct[]
-  changeCount: (id: number, count: number) => void
-  onDelete: (id: number) => void
-  toFavorite: (id: number) => void
-  onChecked: (id: number, checked: boolean) => void
-  checkedAll: boolean
-  onCheckedAll: (checkedAll: boolean) => void
-}
-
-const BasketList: ReactFC<IBasketListProps> = ({
-  products,
-  changeCount,
-  onDelete,
-  toFavorite,
-  onChecked,
-  checkedAll,
-  onCheckedAll,
-}) => {
+const BasketList: ReactFC = () => {
+  const dispatch = useAppDispatch()
+  const { basket } = useAppSelector((state) => state.user)
   const [isOpen, setIsOpen] = useState(true)
-
-  const onChangeCheckedAll = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onCheckedAll(e.target.checked)
-  }
+  const isAllInOrder = basket.every((product) => product.inOrder)
 
   const renderStatInfo = () => {
-    const initialStat = {
-      count: 0,
-      price: 0,
-    }
-    const statInfo = products.reduce((total, item) => {
-      return {
-        count: total.count + item.selectedCount,
-        price:
-          total.price + functionHelpers.getSalePrace(item.price, item.sale),
-      }
-    }, initialStat)
+    const { count, salePrice } = priceHelpers.getOrderInfo(basket)
     return (
       <div className='basket-list__stat'>
-        {statInfo.count} товара -{' '}
-        {functionHelpers.getDigitNumber(statInfo.price)} ₽
+        {count} товара - {functionHelpers.getDigitNumber(salePrice)} ₽
       </div>
     )
   }
@@ -54,38 +26,33 @@ const BasketList: ReactFC<IBasketListProps> = ({
   return (
     <div className='basket-list'>
       <div className='basket-list__head'>
-        <div className='basket-list__check-all'>
-          {isOpen && (
-            <Form.Check
-              type='checkbox'
-              id='basket-check-all'
-              label='Выбрать все'
-              checked={checkedAll}
-              onChange={onChangeCheckedAll}
-            />
-          )}
-          {!isOpen && renderStatInfo()}
-          <div
-            className='basket-list__close'
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? '-' : '+'}
+        {!!basket.length && (
+          <div className='basket-list__check-all'>
+            {isOpen && (
+              <Form.Check
+                type='checkbox'
+                id='basket-check-all'
+                label='Выбрать все'
+                checked={isAllInOrder}
+                onChange={() => dispatch(changeAllInOrderStatus(!isAllInOrder))}
+              />
+            )}
+            {!isOpen && renderStatInfo()}
+            <div
+              className='basket-list__close'
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? '-' : '+'}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div className={`basket-list__products ${isOpen ? '' : 'hide'}`}>
-        {!!products.length &&
-          products.map((product) => (
-            <BasketListItem
-              onDelete={onDelete}
-              toFavorite={toFavorite}
-              key={product.id}
-              product={product}
-              changeCount={changeCount}
-              onChacked={onChecked}
-            />
+        {!!basket.length &&
+          basket.map((product) => (
+            <BasketListItem key={product.id} product={product} />
           ))}
-        {!products.length && <h3>Корзина пуста</h3>}
+        {!basket.length && <h3>Корзина пуста</h3>}
       </div>
     </div>
   )

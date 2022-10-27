@@ -1,36 +1,36 @@
 import functionHelpers from '@src/helpers/functionHelpers'
+import priceHelpers from '@src/helpers/priceHelpers'
+import { useAppDispatch } from '@src/hooks/redux'
 import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
+import { addToBasket, deleteFromFavorite } from '@src/store/userStore/userStore'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './favoriteCard.sass'
 
 export interface IFavoriteCardProps {
   product: IProduct
-  onDelete: (id: number) => void
-  toCart: (id: number) => void
 }
 
-const FavoriteCard: ReactFC<IFavoriteCardProps> = ({
-  product: { id, name, brend, price, cover, sale, bage, color, isAvailable },
-  onDelete,
-  toCart,
-}) => {
+const FavoriteCard: ReactFC<IFavoriteCardProps> = ({ product }) => {
+  const { id, name, brend, price, cover, sale, bage, color, isAvailable } =
+    product
+  const dispatch = useAppDispatch()
   const originalPrice = functionHelpers.getDigitNumber(price)
-  let priceWithSale: string | number = functionHelpers.getSalePrace(price, sale)
+  let priceWithSale: string | number = priceHelpers.getSalePrace(price, sale)
   priceWithSale = functionHelpers.getDigitNumber(priceWithSale)
 
   const addToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    toCart(id)
+    dispatch(addToBasket(product))
     alert('Товар добавлен в корзину!')
   }
 
   const deleteProduct = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    onDelete(id)
+    dispatch(deleteFromFavorite(id))
   }
 
   return (

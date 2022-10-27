@@ -1,123 +1,55 @@
 import BasketList from '@modules/basketList/basketList'
-import BasketOrder, {
-  IBasketOrderProps,
-} from '@src/components/basketOrder/basketOrder'
+import BasketOrder from '@src/components/basketOrder/basketOrder'
 import Button from '@src/components/button/button'
 import Panel from '@src/components/panel/panel'
-import Preloader from '@src/components/preloader/preloader'
-import generateProducts from '@src/data/products'
-import functionHelpers from '@src/helpers/functionHelpers'
-import IProduct from '@src/interfaces/product'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
+import { PaymentTypeEnum, PaymentTypeValueEnum } from '@src/interfaces/payment'
 import { ReactFC } from '@src/interfaces/react'
-import moment from 'moment'
-import React, { useEffect, useState } from 'react'
+import ShippingTypeEnum, {
+  ShippingTypeValueEnum,
+} from '@src/interfaces/shipping'
+import {
+  changePaymentType,
+  changeShippingType,
+  setShippingAddress,
+} from '@src/store/userStore/userStore'
+import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import './basketPage.sass'
 
-const productsData: IProduct[] = generateProducts(7)
-
-const ShipType = {
-  postomat: 'Пункт выдачи',
-  courier: 'Курьер',
-}
-
 const BasketPage: ReactFC = () => {
-  const [products, setProducts] = useState<IProduct[]>(productsData)
+  const dispatch = useAppDispatch()
+  const {
+    warnings,
+    shipping,
+    paymentType,
+    data: { name, lastname },
+  } = useAppSelector((state) => state.user)
   const [isOpenShipModal, setIsOpenShipModal] = useState(false)
   const [isOpenPayMethodModal, setIsOpenPayMethodModal] = useState(false)
-  const [payMethod, setPayMethod] = useState(null)
-  const [shipAddress, setShipAddress] = useState(null)
-  const [shipType, setShipType] = useState(ShipType.postomat)
-  const [orderData, setOrderData] = useState<IBasketOrderProps>(null)
-  const [checkedAll, setCheckedAll] = useState(products.every((i) => i.checked))
-  const [isWarning, setIsWarning] = useState({
-    shipAddress: false,
-    payMethod: false,
-  })
 
-  const checkSettings = () => {
-    const warnings = {
-      shipAddress: false,
-      payMethod: false,
-    }
-    if (!shipAddress) {
-      warnings.shipAddress = true
-    }
-    if (!payMethod) {
-      warnings.payMethod = true
-    }
-    setIsWarning(warnings)
-  }
+  const renderShippingTypes = () => {
+    const shippingTypes = [ShippingTypeEnum.courier, ShippingTypeEnum.postomat]
 
-  const getOrderData = (): IBasketOrderProps => {
-    const filteredProducts = products.filter((item) => item.checked)
-    const totalInfo = {
-      count: 0,
-      salePrice: 0,
-      fullPrice: 0,
-      saleSize: 0,
-    }
-    const countPrice = filteredProducts.reduce((total, item) => {
-      const totalPrice = item.price * item.selectedCount
-      const salePrice =
-        total.salePrice + functionHelpers.getSalePrace(totalPrice, item.sale)
-      const fullPrice = total.fullPrice + totalPrice
-
-      return {
-        count: total.count + item.selectedCount,
-        salePrice,
-        fullPrice,
-        saleSize: fullPrice - salePrice,
-      }
-    }, totalInfo)
-
-    return {
-      price: countPrice.salePrice,
-      fullPrice: countPrice.fullPrice,
-      sale: countPrice.saleSize,
-      count: countPrice.count,
-      shipType,
-      shipAddress,
-      shipRangeDate: {
-        from: moment().add(1, 'd'),
-        to: moment().add(3, 'd'),
-      },
-      payMethod,
-      onWarning: checkSettings,
-    }
-  }
-
-  useEffect(() => {
-    const data = getOrderData()
-    setOrderData(data)
-  }, [payMethod, shipAddress, shipType, products])
-
-  const renderShipTypes = () => {
-    return Object.keys(ShipType).map((key: keyof typeof ShipType) => (
+    return shippingTypes.map((key: ShippingTypeEnum) => (
       <div
         key={key}
-        className={`basket__ship-type ${
-          shipType === ShipType[key] ? 'active' : ''
-        }`}
-        onClick={() => setShipType(ShipType[key])}
+        className={`basket__ship-type ${shipping.type === key ? 'active' : ''}`}
+        onClick={() => dispatch(changeShippingType(key))}
       >
-        {ShipType[key]}
+        {ShippingTypeValueEnum[key]}
       </div>
     ))
   }
 
   const renderShipAddressList = () => {
-    const adresses = [
-      'Москва, какой-то там бульвар 1',
-      'Санкт-Петербург, ул. Петра 1, д. 3',
-    ]
-    return adresses.map((address) => {
+    return shipping.addreses.map((address) => {
       return (
         <strong
           key={address}
-          className={address === shipAddress ? 'active' : ''}
+          className={address === shipping.address ? 'active' : ''}
           onClick={() => {
-            setShipAddress(address)
+            dispatch(setShippingAddress(address))
             setIsOpenShipModal(false)
           }}
         >
@@ -127,62 +59,24 @@ const BasketPage: ReactFC = () => {
     })
   }
 
-  const renderPayMethods = () => {
-    const payMethods = ['Картой', 'QR код', 'Кредит']
-    return payMethods.map((method) => (
+  const renderPaymentTypes = () => {
+    const paymentTypes = [
+      PaymentTypeEnum.card,
+      PaymentTypeEnum.qr,
+      PaymentTypeEnum.credit,
+    ]
+    return paymentTypes.map((key: PaymentTypeEnum) => (
       <div
-        key={method}
-        className={`basket__pay-method ${method === payMethod ? 'active' : ''}`}
+        key={key}
+        className={`basket__pay-method ${key === paymentType ? 'active' : ''}`}
         onClick={() => {
-          setPayMethod(method)
+          dispatch(changePaymentType(key))
           setIsOpenPayMethodModal(false)
         }}
       >
-        {method}
+        {PaymentTypeValueEnum[key]}
       </div>
     ))
-  }
-
-  const changeCount = (id: number, count: number) => {
-    const updatedProducts = products.map((product: IProduct) => {
-      if (product.id === id) {
-        product.selectedCount = count
-      }
-      return product
-    })
-    setProducts(updatedProducts)
-  }
-
-  const onDelete = (id: number) => {
-    const filteredProducts = products.filter((item) => item.id !== id)
-    setProducts(filteredProducts)
-    alert('Товар удален из корзины')
-  }
-
-  const toFavorite = (id: number) => {
-    const filteredProducts = products.filter((item) => item.id !== id)
-    setProducts(filteredProducts)
-    alert('Товар добавлен в избранное')
-  }
-
-  const onCheckedAll = (isCheckedAll: boolean) => {
-    const updatedProducts = products.map((item) => {
-      item.checked = isCheckedAll
-      return item
-    })
-    setProducts(updatedProducts)
-    setCheckedAll(isCheckedAll)
-  }
-
-  const onChecked = (id: number, checked: boolean) => {
-    const updatedProducts = products.map((item) => {
-      if (item.id === id) {
-        item.checked = checked
-      }
-      return item
-    })
-    setCheckedAll(updatedProducts.every((item) => item.checked))
-    setProducts(updatedProducts)
   }
 
   return (
@@ -190,24 +84,16 @@ const BasketPage: ReactFC = () => {
       <div className='basket'>
         <div className='basket__main'>
           <Panel title='Корзина'>
-            <BasketList
-              checkedAll={checkedAll}
-              onCheckedAll={onCheckedAll}
-              products={products}
-              changeCount={changeCount}
-              onDelete={onDelete}
-              toFavorite={toFavorite}
-              onChecked={onChecked}
-            />
+            <BasketList />
           </Panel>
           <Panel
             id='ship-type'
             title='Способ доставки'
-            isWarning={isWarning.shipAddress}
-            isChange={shipAddress}
+            isWarning={warnings.address}
+            isChange={!!shipping.address}
             onChange={() => setIsOpenShipModal(true)}
           >
-            {!shipAddress && (
+            {!shipping.address && (
               <strong
                 className='basket__select-address'
                 onClick={() => setIsOpenShipModal(true)}
@@ -215,36 +101,39 @@ const BasketPage: ReactFC = () => {
                 Выбрать адрес доставки
               </strong>
             )}
-            {!!shipAddress && <strong>{shipAddress}</strong>}
+            {!!shipping.address && <strong>{shipping.address}</strong>}
           </Panel>
           <Panel
             id='pay-method'
             title='Способ оплаты'
-            isWarning={isWarning.payMethod}
-            isChange={payMethod}
+            isWarning={warnings.paymentType}
+            isChange={!!paymentType}
             onChange={() => setIsOpenPayMethodModal(true)}
           >
-            {!shipAddress && (
+            {!shipping.address && (
               <span>
                 Для выбора способа оплаты, необходимо выбрать адрес доставки
               </span>
             )}
-            {!!shipAddress && (
+            {!!shipping.address && (
               <div className='basket__selected-pay-method'>
-                {!payMethod && (
+                {!paymentType && (
                   <strong onClick={() => setIsOpenPayMethodModal(true)}>
                     Выбрать способ оплаты
                   </strong>
                 )}
-                {!!payMethod && <span>{payMethod}</span>}
+                {!!paymentType && (
+                  <span>{PaymentTypeValueEnum[paymentType]}</span>
+                )}
               </div>
             )}
           </Panel>
-          <Panel title='Ваши данные'>Анатолий Ивашов</Panel>
+          <Panel title='Ваши данные'>
+            {name} {lastname}
+          </Panel>
         </div>
         <div className='basket__sidebar'>
-          {!orderData && <Preloader />}
-          {!!orderData && <BasketOrder {...orderData} />}
+          <BasketOrder />
         </div>
       </div>
       <Modal
@@ -258,7 +147,7 @@ const BasketPage: ReactFC = () => {
         </Modal.Header>
         <Modal.Body>
           <div className='basket__modal-content'>
-            <div className='basket__ship-types'>{renderShipTypes()}</div>
+            <div className='basket__ship-types'>{renderShippingTypes()}</div>
             <div className='basket__ship-address-list'>
               {renderShipAddressList()}
             </div>
@@ -282,7 +171,7 @@ const BasketPage: ReactFC = () => {
         </Modal.Header>
         <Modal.Body>
           <div className='basket__modal-content'>
-            <div className='basket__pay-methods'>{renderPayMethods()}</div>
+            <div className='basket__pay-methods'>{renderPaymentTypes()}</div>
           </div>
         </Modal.Body>
       </Modal>

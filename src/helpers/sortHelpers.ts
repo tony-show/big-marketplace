@@ -1,18 +1,18 @@
 import IProduct from '@src/interfaces/product'
 import SortTypeEnum from '@src/interfaces/sort'
-import functionHelpers from './functionHelpers'
+import priceHelpers from './priceHelpers'
 
 const sortHelpers = {
   sortFavoriteProducts: (sortType: SortTypeEnum, products: IProduct[]) => {
     products.sort((a, b) => {
       const dataA = {
         date: a.addToFavoriteDate.valueOf(),
-        price: functionHelpers.getSalePrace(a.price, a.sale),
+        price: priceHelpers.getSalePrace(a.price, a.sale),
         isAvailable: a.isAvailable,
       }
       const dataB = {
         date: b.addToFavoriteDate.valueOf(),
-        price: functionHelpers.getSalePrace(b.price, b.sale),
+        price: priceHelpers.getSalePrace(b.price, b.sale),
         isAvailable: b.isAvailable,
       }
 
@@ -41,14 +41,14 @@ const sortHelpers = {
   sortProducts: (sortType: SortTypeEnum, products: IProduct[]) => {
     const sortedProducts = [...products].sort((a, b) => {
       const dataA = {
-        price: functionHelpers.getSalePrace(a.price, a.sale),
+        price: priceHelpers.getSalePrace(a.price, a.sale),
         rating: a.rating,
         soldCount: a.soldCount,
         sale: a.sale,
         updated: a.updated,
       }
       const dataB = {
-        price: functionHelpers.getSalePrace(b.price, b.sale),
+        price: priceHelpers.getSalePrace(b.price, b.sale),
         rating: b.rating,
         soldCount: b.soldCount,
         sale: b.sale,

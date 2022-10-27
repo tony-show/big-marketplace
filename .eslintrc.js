@@ -42,7 +42,7 @@ module.exports = {
     'default-param-last': 'off',
     '@typescript-eslint/ban-types': 'off',
     'no-param-reassign': 'off',
-    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'no-plusplus': 'off',
     'react/prop-types': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],

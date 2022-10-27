@@ -1,6 +1,9 @@
 import functionHelpers from '@src/helpers/functionHelpers'
+import priceHelpers from '@src/helpers/priceHelpers'
+import { useAppDispatch } from '@src/hooks/redux'
 import IProduct, { ColorsEnum } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
+import { hideProductFromBayed, toRefund } from '@src/store/userStore/userStore'
 import moment from 'moment'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -9,7 +12,6 @@ import './orderCard.sass'
 export interface IOrderCardProps {
   product: IProduct
   addReview: (id: number) => void
-  onHide: (id: number) => void
 }
 
 const OrderCard: ReactFC<IOrderCardProps> = ({
@@ -24,13 +26,13 @@ const OrderCard: ReactFC<IOrderCardProps> = ({
     color,
     orderDate,
     getDate,
+    isRefund,
   },
   addReview,
-  onHide,
 }) => {
+  const dispatch = useAppDispatch()
   const [menuIsOpen, setMenuIsOpen] = useState(false)
-  const [isRefund, setIsRefund] = useState(false)
-  let priceWithSale: string | number = functionHelpers.getSalePrace(price, sale)
+  let priceWithSale: string | number = priceHelpers.getSalePrace(price, sale)
   priceWithSale = functionHelpers.getDigitNumber(priceWithSale)
 
   const onAddReview = (e: React.MouseEvent) => {
@@ -48,14 +50,14 @@ const OrderCard: ReactFC<IOrderCardProps> = ({
   const addToRefund = (e) => {
     e.preventDefault()
     e.stopPropagation()
+    dispatch(toRefund(id))
     setMenuIsOpen(false)
-    setIsRefund(true)
   }
 
   const hideProduct = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    onHide(id)
+    dispatch(hideProductFromBayed(id))
   }
 
   return (
