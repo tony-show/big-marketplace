@@ -5,25 +5,21 @@ import RatingStars from '@src/components/ratingStars/ratingStars'
 import breadcrumbsHelpers from '@src/helpers/breadcrumbsHelpers'
 import IBreadcrumb from '@src/interfaces/breadcrumb'
 import ICategoriesParams from '@src/interfaces/params'
-import IProduct from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import './productPage.sass'
-import generateProducts from '@src/data/products'
-
-const productData: IProduct = generateProducts(1)[0]
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
+import { setProduct } from '@src/store/productsStore/productsStore'
+import { ColorsEnum } from '@src/interfaces/product'
 
 const ProductPage: ReactFC = () => {
   const { id } = useParams()
-  const [product, setProduct] = useState<IProduct>()
+  const dispatch = useAppDispatch()
+  const { product } = useAppSelector((state) => state.products)
 
   useEffect(() => {
-    if (id) {
-      setTimeout(() => {
-        setProduct(productData)
-      }, 300)
-    }
+    dispatch(setProduct(+id))
   }, [id])
 
   const getBreadcrumbsData = (): IBreadcrumb[] => {
@@ -46,10 +42,10 @@ const ProductPage: ReactFC = () => {
       <Breadcrumbs data={getBreadcrumbsData()} />
       <h1 className='product__title'>
         {product.brend.label} / {product.name} / {product.ram} / {product.ssd} /{' '}
-        {product.color}
+        {ColorsEnum[product.color]}
       </h1>
       <div className='product__statistic'>
-        <RatingStars rating={4} />
+        <RatingStars rating={product.rating.total} />
         <a href='#reviews' className='product__reviews-link'>
           6 отзывов
         </a>
@@ -57,9 +53,9 @@ const ProductPage: ReactFC = () => {
           <span>Артикул:</span>
           <strong>113006388</strong>
         </div>
-        <span>Купили более 40 раз</span>
+        <span>Купили {product.soldCount} раз</span>
       </div>
-      <ProductInfo product={product} />
+      <ProductInfo />
     </div>
   )
 }
