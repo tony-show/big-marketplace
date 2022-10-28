@@ -4,13 +4,13 @@ import { useSwiper } from 'swiper/react'
 import ContentZoom from 'react-content-zoom'
 
 interface IPreviewSlideProps {
-  slide: number
+  img: string
   activeSlide: number
   className: string
 }
 
 const Slide: ReactFC<IPreviewSlideProps> = ({
-  slide,
+  img,
   activeSlide,
   className,
 }) => {
@@ -22,11 +22,7 @@ const Slide: ReactFC<IPreviewSlideProps> = ({
 
   return (
     <div className={className}>
-      <ContentZoom
-        zoomPercent={350}
-        largeImageUrl={`https://placeimg.com/1920/1080/tech?id=${slide}`}
-        imageUrl={`https://placeimg.com/1920/1080/tech?id=${slide}`}
-      />
+      <ContentZoom zoomPercent={350} largeImageUrl={img} imageUrl={img} />
     </div>
   )
 }
