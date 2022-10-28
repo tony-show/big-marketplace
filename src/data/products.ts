@@ -1,3 +1,4 @@
+import functionHelpers from '@src/helpers/functionHelpers'
 import { ICheckRadio } from '@src/interfaces/filters'
 import IProduct from '@src/interfaces/product'
 import moment from 'moment'
@@ -19,6 +20,14 @@ const brends: ICheckRadio[] = [
   { id: 14, label: 'Samsung', value: 'samsung' },
 ]
 
+const generateImages = (num: number) => {
+  const images = []
+  for (let i = 0; i < num; i++) {
+    images.push(`https://placeimg.com/400/300/tech?id=${i}`)
+  }
+  return images
+}
+
 const generateProducts = (num: number) => {
   const products: IProduct[] = []
 
@@ -26,19 +35,23 @@ const generateProducts = (num: number) => {
     const names = ['IPhone 13 Pro Max', 'Mackbook Pro', 'Super Vision']
     const colors = ['black', 'blue', 'green', 'yellow', 'red', 'white']
     const ratingTotalNums: (1 | 2 | 3 | 4 | 5)[] = [1, 2, 3, 4, 5]
-    const nameId = Math.floor(Math.random() * names.length)
-    const brendId = Math.floor(Math.random() * brends.length)
+    const nameId = functionHelpers.getRandomNumber(names.length)
+    const brendId = functionHelpers.getRandomNumber(brends.length)
     const colorId = Math.floor(Math.random() * colors.length)
-    const date = moment(Date.now() - Math.floor(Math.random() * 1000000000))
-    const ratingTotalId = Math.floor(Math.random() * ratingTotalNums.length)
+    const date = moment(Date.now() - functionHelpers.getRandomMilliseconds(10))
+    const ratingTotalId = functionHelpers.getRandomNumber(
+      ratingTotalNums.length
+    )
+    const imagesCount = functionHelpers.getRandomNumberInRange(1, 10)
+    const images = generateImages(imagesCount)
     const productData: IProduct = {
       id: i,
       name: names[nameId],
       brend: brends[brendId],
       cover: `https://placeimg.com/400/300/tech?id=${i}`,
-      price: Math.floor(Math.random() * 1000000),
+      price: functionHelpers.getRandomNumber(1000000),
       link: '/catalog/elektronika/telefony',
-      sale: Math.floor(Math.random() * 100),
+      sale: functionHelpers.getRandomNumber(100),
       color: colors[colorId] as
         | 'black'
         | 'blue'
@@ -50,7 +63,7 @@ const generateProducts = (num: number) => {
       ssd: '1 Тб',
       rating: {
         total: ratingTotalNums[ratingTotalId],
-        count: Math.floor(Math.random() * 100),
+        count: functionHelpers.getRandomNumber(100),
       },
       seller: 'OZON',
       shipTime: Math.ceil(Math.random() * 5),
@@ -61,9 +74,10 @@ const generateProducts = (num: number) => {
       selectedColor: 'white',
       orderDate: +date,
       getDate: +date.add(3, 'day'),
-      orderStatus: Math.floor(Math.random() * 5),
-      soldCount: Math.floor(Math.random() * 100),
-      updated: +date - Math.floor(Math.random() * 10000000000),
+      orderStatus: functionHelpers.getRandomNumber(5),
+      soldCount: functionHelpers.getRandomNumber(100),
+      updated: +date - functionHelpers.getRandomMilliseconds(10),
+      images,
     }
     products.push(productData)
   }
