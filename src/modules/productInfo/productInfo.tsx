@@ -1,12 +1,12 @@
-import IProduct, { IInformationList } from '@src/interfaces/product'
+import { IInformationList } from '@src/interfaces/product'
 import { ReactFC } from '@src/interfaces/react'
 import React, { useState } from 'react'
+import functionHelpers from '@src/helpers/functionHelpers'
 import InformationList from './informationList/informationList'
 import ProductSlider from './productSlider/productSlider'
 import './productInfo.sass'
 import ProductActions from './productActions/productActions'
 import FixedPanel from './fixedPanel/fixedPanel'
-import functionHelpers from '@src/helpers/functionHelpers'
 
 const dataProductIformation: IInformationList[] = [
   {
@@ -50,11 +50,7 @@ const dataProductIformation: IInformationList[] = [
   },
 ]
 
-interface IProductInfoProps {
-  product: IProduct
-}
-
-const ProductInfo: ReactFC<IProductInfoProps> = ({ product }) => {
+const ProductInfo: ReactFC = () => {
   const [isOpenCharacteristics, setIsOpenCharacteristics] = useState(false)
   const [isOpenDescription, setIsOpenDescription] = useState(false)
 
@@ -127,7 +123,7 @@ const ProductInfo: ReactFC<IProductInfoProps> = ({ product }) => {
           beatae repudiandae magni non.
         </div>
       </div>
-      <FixedPanel product={product} />
+      <FixedPanel />
     </div>
   )
 }

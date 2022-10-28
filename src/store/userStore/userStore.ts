@@ -3,7 +3,7 @@ import { PaymentTypeEnum } from '@src/interfaces/payment'
 import IProduct from '@src/interfaces/product'
 import ShippingTypeEnum from '@src/interfaces/shipping'
 
-interface IProductsState {
+interface IUserState {
   data: {
     name: string
     lastname: string
@@ -25,7 +25,7 @@ interface IProductsState {
   }
 }
 
-const initialState: IProductsState = {
+const initialState: IUserState = {
   data: {
     name: 'Анатолий',
     lastname: 'Ивашов',
