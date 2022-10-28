@@ -1,25 +1,52 @@
 import Button from '@src/components/button/button'
 import RatingStars from '@src/components/ratingStars/ratingStars'
 import functionHelpers from '@src/helpers/functionHelpers'
-import IProduct from '@src/interfaces/product'
+import priceHelpers from '@src/helpers/priceHelpers'
+import productHelpers from '@src/helpers/productHelpers'
+import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
+import routing from '@src/routes/routes'
+import {
+  addToBasket,
+  addToFavorite,
+  deleteFromFavorite,
+} from '@src/store/userStore/userStore'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './fixedPanel.sass'
 
-interface IFixedPanelProps {
-  product: IProduct
-}
-
-const FixedPanel: ReactFC<IFixedPanelProps> = ({ product }) => {
-  const [isFavorite, setIsFavorite] = useState(false)
-  const [inCart, setInCart] = useState(false)
+const FixedPanel: ReactFC = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const dispatch = useAppDispatch()
+  const {
+    products: { product },
+    user: { basket, favorite },
+  } = useAppSelector((state) => state)
+  const navigate = useNavigate()
+  const priceWithSale = priceHelpers.getSalePrace(product.price, product.sale)
+  const haveProductInBasket = productHelpers.haveProduct(product.id, basket)
+  const haveProductInFavorite = productHelpers.haveProduct(product.id, favorite)
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
       setIsOpen(window.scrollY > 500)
     })
   }, [])
+
+  const handleFavorite = () => {
+    if (haveProductInFavorite) {
+      dispatch(deleteFromFavorite(product.id))
+    } else {
+      dispatch(addToFavorite(product))
+    }
+  }
+
+  const buyNow = () => {
+    if (!haveProductInBasket) {
+      dispatch(addToBasket(product))
+    }
+    navigate(routing.basket)
+  }
 
   return (
     <div className={`fixed-panel ${isOpen ? 'open' : ''}`}>
@@ -33,28 +60,31 @@ const FixedPanel: ReactFC<IFixedPanelProps> = ({ product }) => {
             </span>
           </div>
           <div className='fixed-panel__stat'>
-            <RatingStars rating={4} />
+            <RatingStars rating={product.rating.total} />
             <a href='#reviews' className='fixed-panel__reviews-link'>
               6 отзывов
             </a>
           </div>
         </div>
         <div className='fixed-panel__price'>
-          <strong>{functionHelpers.getDigitNumber(126556)} ₽</strong>
-          <span>{functionHelpers.getDigitNumber(218200)} ₽</span>
+          <strong>{functionHelpers.getDigitNumber(priceWithSale)} ₽</strong>
+          <span>{functionHelpers.getDigitNumber(product.price)} ₽</span>
         </div>
         <div className='fixed-panel__actions'>
-          <Button theme='outline' onClick={() => alert('Купим чуть позже ;)')}>
+          <Button theme='outline' onClick={buyNow}>
             Купить сейчас
           </Button>
-          <Button onClick={() => setInCart(!inCart)}>
-            {inCart ? 'Добавлено в корзину' : 'Добавить в корзину'}
+          <Button
+            onClick={() => dispatch(addToBasket(product))}
+            disable={haveProductInBasket}
+          >
+            {haveProductInBasket ? 'Добавлено в корзину' : 'Добавить в корзину'}
           </Button>
           <i
             className={`ic_heart${
-              isFavorite ? '-fill active' : ''
+              haveProductInFavorite ? '-fill active' : ''
             } fixed-panel__to-favorite`}
-            onClick={() => setIsFavorite(!isFavorite)}
+            onClick={handleFavorite}
           />
         </div>
       </div>
