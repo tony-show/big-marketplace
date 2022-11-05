@@ -16,11 +16,17 @@ import { ColorsEnum } from '@src/interfaces/product'
 const ProductPage: ReactFC = () => {
   const { id } = useParams()
   const dispatch = useAppDispatch()
-  const { product } = useAppSelector((state) => state.products)
+  const { product, haveData, isLoading } = useAppSelector(
+    (state) => state.products
+  )
 
   useEffect(() => {
-    dispatch(setProduct(+id))
-  }, [id])
+    if (haveData) {
+      dispatch(setProduct(+id))
+    }
+  }, [id, haveData])
+
+  if (!product || isLoading || !haveData) return <Preloader />
 
   const getBreadcrumbsData = (): IBreadcrumb[] => {
     const params: ICategoriesParams = {
@@ -34,8 +40,6 @@ const ProductPage: ReactFC = () => {
     })
     return breadcrumbs
   }
-
-  if (!product) return <Preloader />
 
   return (
     <div className='product-page'>
