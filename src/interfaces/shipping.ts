@@ -8,3 +8,9 @@ export enum ShippingTypeValueEnum {
   postomat = 'Пункт выдачи',
   courier = 'Курьер',
 }
+
+export interface IShipping {
+  type: ShippingTypeEnum
+  address: string
+  addreses: string[]
+}

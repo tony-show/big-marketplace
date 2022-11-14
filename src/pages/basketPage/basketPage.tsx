@@ -12,7 +12,7 @@ import {
   changePaymentType,
   changeShippingType,
   setShippingAddress,
-} from '@src/store/userStore/userStore'
+} from '@src/store/userStore/actions'
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import './basketPage.sass'

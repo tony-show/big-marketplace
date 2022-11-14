@@ -1,44 +1,33 @@
+const generateProducts = require('./src/server/data/products')
+
 module.exports = () => {
   const data = {
-    projects: [],
-  }
-
-  const getImages = (id, count) => {
-    const images = []
-    for (let i = 1; i <= count; i++) {
-      images.push(`https://placeimg.com/1920/1080/tech?id=${id}${i}`)
-    }
-    return images
-  }
-
-  for (let i = 1; i <= 100; i++) {
-    const contentImages = getImages(i, Math.floor(Math.random() * 5))
-    const sliderImages = getImages(i + 1, Math.floor(Math.random() * 10))
-    const coverImage = `https://placeimg.com/1920/1080/tech?id=${i}`
-    data.projects.push({
-      id: i,
-      cover: coverImage,
-      title: `Project ${i}`,
-      client: {
-        name: 'Вася Пупкин',
-        date: '14 июля 2022',
-        country: 'Россия',
+    products: [],
+    users: [
+      {
+        id: 1,
+        data: {
+          name: 'Анатолий',
+          lastname: 'Ивашов',
+          phone: '+7 000 000 00-00',
+        },
+        isNotification: false,
+        shipping: {
+          type: 'courier',
+          address: null,
+          addreses: [
+            'Москва, какой-то там бульвар 1',
+            'Санкт-Петербург, ул. Петра 1, д. 3',
+          ],
+        },
+        paymentType: null,
+        basket: [],
+        favorite: [],
+        bayed: [],
       },
-      description: 'Текст описания',
-      skills: ['Ecommerce', 'Web Development', 'UI Design'],
-      content: {
-        description: 'Полное описание проекта',
-        images: contentImages,
-      },
-      slides: sliderImages,
-      review: {
-        text: 'Text review',
-        author: 'Anatoly Ivashov',
-        company: 'tonyshow',
-      },
-      site: 'https://tonyshow.ru',
-    })
+    ],
   }
+  data.products = generateProducts(100)
 
   return data
 }

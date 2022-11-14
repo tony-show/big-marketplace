@@ -1,13 +1,16 @@
 import CollectionCard from '@src/components/collectionCard/collectionCard'
 import MainPageSlider from '@src/components/mainPageSlider/mainPageSlider'
 import MiniProductCard from '@src/components/miniProductCard/miniProductCard'
-import generateProducts from '@src/data/products'
-import IProduct from '@src/interfaces/product'
+import Preloader from '@src/components/preloader/preloader'
+import { useAppSelector } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
 import React, { ReactNode } from 'react'
 import './mainCategoryPage.sass'
 
 const MainCategoryPage: ReactFC = () => {
+  const { isLoading, haveData, products } = useAppSelector(
+    (state) => state.products
+  )
   const renderCollections = (num: number) => {
     const collections: ReactNode[] = []
     for (let i = 0; i < num; i++) {
@@ -17,15 +20,16 @@ const MainCategoryPage: ReactFC = () => {
   }
 
   const renderProducts = (num: number) => {
-    const productsData = generateProducts(num)
-    const products: ReactNode[] = []
-    productsData.forEach((productData: IProduct) => {
-      products.push(
-        <MiniProductCard key={productData.id} product={productData} />
+    const cutProducts: ReactNode[] = []
+    for (let i = 0; i < num; i++) {
+      cutProducts.push(
+        <MiniProductCard key={products[i].id} product={products[i]} />
       )
-    })
-    return products
+    }
+    return cutProducts
   }
+
+  if (isLoading || !haveData) return <Preloader />
 
   return (
     <>
