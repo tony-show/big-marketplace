@@ -1,7 +1,8 @@
+import Preloader from '@src/components/preloader/preloader'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
 import { ReactFC } from '@src/interfaces/react'
 import routing from '@src/routes/routes'
-import { changeNotificationStatus } from '@src/store/userStore/userStore'
+import { setNotificationStatus } from '@src/store/userStore/actions'
 import React from 'react'
 import './account.sass'
 import AccountCard from './accountCard/accountCard'
@@ -9,12 +10,10 @@ import AccountNavigation from './accountNavigation/accountNavigation'
 
 const Account: ReactFC = () => {
   const dispatch = useAppDispatch()
-  const {
-    data: { name, lastname, phone },
-    isNotification,
-    bayed,
-    favorite,
-  } = useAppSelector((state) => state.user)
+  const { id, data, isNotification, bayed, favorite, isLoading, haveData } =
+    useAppSelector((state) => state.user)
+
+  if (isLoading || !haveData || !data) return <Preloader />
 
   return (
     <div className='account'>
@@ -24,11 +23,18 @@ const Account: ReactFC = () => {
       <div className='account__row2'>
         <AccountCard
           link={routing.account.profile}
-          title={`${name} ${lastname}`}
+          title={`${data.name} ${data.lastname}`}
           subTitle='Подтвердить аккаунт'
           label='Телефон'
-          text={phone}
-          onNotification={() => dispatch(changeNotificationStatus())}
+          text={data.phone}
+          onNotification={() =>
+            dispatch(
+              setNotificationStatus({
+                id,
+                status: !isNotification,
+              })
+            )
+          }
           isNotification={isNotification}
           logout
           isBig

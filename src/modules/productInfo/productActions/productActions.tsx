@@ -9,7 +9,7 @@ import {
   addToBasket,
   addToFavorite,
   deleteFromFavorite,
-} from '@src/store/userStore/userStore'
+} from '@src/store/userStore/actions'
 import moment from 'moment'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'

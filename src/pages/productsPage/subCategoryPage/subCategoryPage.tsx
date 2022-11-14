@@ -1,4 +1,5 @@
 import CustomPagination from '@src/components/pagination/pagination'
+import Preloader from '@src/components/preloader/preloader'
 import ProductCard from '@src/components/productCard/productCard'
 import sortHelpers from '@src/helpers/sortHelpers'
 import { useAppDispatch, useAppSelector } from '@src/hooks/redux'
@@ -14,9 +15,9 @@ import './subCategoryPage.sass'
 
 const SubCategoryPage: ReactFC = () => {
   const dispatch = useAppDispatch()
-  const { filteredProducts, sortType, viewType } = useAppSelector(
-    (state) => state.products
-  )
+  const { filteredProducts, sortType, viewType, isLoading, haveData } =
+    useAppSelector((state) => state.products)
+
   const isPriceSortType =
     sortType === SortTypeEnum.priceUp || sortType === SortTypeEnum.priceDown
 
@@ -87,6 +88,8 @@ const SubCategoryPage: ReactFC = () => {
   const setViewType = (type: 'small' | 'big') => {
     dispatch(changeViewType(type))
   }
+
+  if (isLoading || !haveData) return <Preloader />
 
   return (
     <>
